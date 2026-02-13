@@ -6,6 +6,7 @@ import { HarmonicPathViz } from "./harmonic-path-viz";
 import { BeforeAfterComparison } from "./before-after-comparison";
 import { TransitionList } from "./transition-list";
 import { DownloadButton } from "./download-button";
+import { SavePlaylistButton } from "./save-playlist-button";
 
 interface OptimizationResultsProps {
   result: OptimizationResult;
@@ -56,11 +57,15 @@ export function OptimizationResults({
         <TransitionList transitions={result.optimizedScore.transitions} />
       </div>
 
-      {/* Download */}
-      <div className="flex justify-center">
+      {/* Actions: Download + Save */}
+      <div className="flex flex-wrap items-center justify-center gap-4">
         <DownloadButton
           tracks={result.optimizedTracks}
           originalFileName={fileName}
+        />
+        <SavePlaylistButton
+          result={result}
+          defaultName={fileName || "Untitled Playlist"}
         />
       </div>
     </div>
