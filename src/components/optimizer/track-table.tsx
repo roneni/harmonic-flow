@@ -48,14 +48,14 @@ export function TrackTable({
                   {track.artist}
                 </td>
                 <td className="px-4 py-2.5 text-right font-mono text-text-primary">
-                  {track.bpm ?? "—"}
+                  {track.bpm ?? "-"}
                 </td>
                 <td
                   className={`px-4 py-2.5 text-center font-mono ${
                     isInvalid ? "text-clash font-bold" : "text-text-primary"
                   }`}
                 >
-                  {track.key || "—"}
+                  {track.key || "-"}
                   {isInvalid && (
                     <span className="ml-1 text-xs" title="Unrecognized key">
                       !

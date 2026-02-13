@@ -32,7 +32,7 @@ export function OptimizationResults({
       {/* Harmonic path visualization */}
       <div className="rounded-xl border border-text-secondary/10 bg-surface p-6">
         <h3 className="mb-4 text-sm font-medium uppercase tracking-wider text-text-secondary">
-          Harmonic Path — Circle of Fifths
+          Harmonic Path - Circle of Fifths
         </h3>
         <HarmonicPathViz path={result.harmonicPath} />
       </div>

@@ -11,17 +11,17 @@ const MODES: { id: EnergyMode; label: string; description: string }[] = [
   {
     id: "ramp_up",
     label: "Ramp Up",
-    description: "Build energy gradually — ascending BPM",
+    description: "Build energy gradually - ascending BPM",
   },
   {
     id: "ramp_down",
     label: "Ramp Down",
-    description: "Wind down smoothly — descending BPM",
+    description: "Wind down smoothly - descending BPM",
   },
   {
     id: "wave",
     label: "Wave",
-    description: "Peaks and valleys — alternating energy",
+    description: "Peaks and valleys - alternating energy",
   },
 ];
 

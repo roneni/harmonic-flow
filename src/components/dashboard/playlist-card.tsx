@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { SavedPlaylist } from "@/lib/supabase/types";
 import type { Track, QualityScore } from "@/lib/types";
+import { exportRekordboxXml } from "@/lib/export/export-rekordbox-xml";
 
 interface PlaylistCardProps {
   playlist: SavedPlaylist;
@@ -30,6 +31,10 @@ export function PlaylistCard({
     await onDelete(playlist.id);
     setDeleting(false);
     setConfirmDelete(false);
+  };
+
+  const handleDownloadXml = () => {
+    downloadPlaylistXml(playlist);
   };
 
   return (
@@ -92,6 +97,12 @@ export function PlaylistCard({
         >
           Download CSV
         </button>
+        <button
+          onClick={handleDownloadXml}
+          className="rounded-lg px-3 py-1.5 text-xs font-medium text-text-secondary transition-colors hover:bg-primary/10 hover:text-primary"
+        >
+          Rekordbox XML
+        </button>
 
         {confirmDelete ? (
           <div className="ml-auto flex items-center gap-2">
@@ -142,6 +153,21 @@ export function downloadPlaylistCsv(playlist: SavedPlaylist) {
   const a = document.createElement("a");
   a.href = url;
   a.download = `harmonyset-${playlist.name.toLowerCase().replace(/\s+/g, "-")}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+/** Utility to download a saved playlist as Rekordbox XML */
+export function downloadPlaylistXml(playlist: SavedPlaylist) {
+  const tracks = playlist.optimized_data as Track[];
+  if (!tracks || !Array.isArray(tracks)) return;
+
+  const xml = exportRekordboxXml(tracks, `HarmonySet - ${playlist.name}`);
+  const blob = new Blob([xml], { type: "application/xml;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `harmonyset-${playlist.name.toLowerCase().replace(/\s+/g, "-")}.xml`;
   a.click();
   URL.revokeObjectURL(url);
 }

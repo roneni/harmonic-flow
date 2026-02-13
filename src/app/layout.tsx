@@ -16,16 +16,16 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Harmonic Flow — DJ Playlist Optimizer",
-    template: "%s | Harmonic Flow",
+    default: "HarmonySet - DJ Playlist Optimizer",
+    template: "%s | HarmonySet",
   },
   description:
     "Mathematically optimize your DJ playlist for perfect harmonic mixing. Works with Rekordbox, Traktor, and Serato exports.",
   openGraph: {
-    title: "Harmonic Flow — DJ Playlist Optimizer",
+    title: "HarmonySet - DJ Playlist Optimizer",
     description:
       "Mathematically optimize your DJ playlist for perfect harmonic mixing.",
-    siteName: "Harmonic Flow",
+    siteName: "HarmonySet",
     type: "website",
   },
 };

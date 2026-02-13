@@ -7,7 +7,7 @@ const STEPS = [
     number: "01",
     title: "Upload",
     description:
-      "Drop your Rekordbox XML, CSV, or TXT playlist export. We parse everything client-side — your files never leave your browser.",
+      "Drop your Rekordbox XML, CSV, or TXT playlist export. We parse everything client-side - your files never leave your browser.",
   },
   {
     number: "02",

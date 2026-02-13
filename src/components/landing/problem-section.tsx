@@ -18,7 +18,7 @@ export function ProblemSection() {
           <span className="text-clash">Matters</span>
         </h2>
         <p className="mx-auto mt-6 max-w-2xl text-lg text-text-secondary leading-relaxed">
-          A great DJ set isn&apos;t just about picking great tracks &mdash; it&apos;s
+          A great DJ set isn&apos;t just about picking great tracks - it&apos;s
           about the order. A bad key transition can break the energy on a
           dance floor. Manually sorting 20+ tracks by harmonic compatibility
           takes hours and still leaves gaps.
@@ -32,7 +32,7 @@ export function ProblemSection() {
             </p>
           </div>
           <div className="rounded-xl border border-success/20 bg-success/5 p-5 text-left">
-            <p className="text-sm font-semibold text-success">With HarmonicFlow</p>
+            <p className="text-sm font-semibold text-success">With HarmonySet</p>
             <p className="mt-2 text-sm text-text-secondary">
               Mathematically perfect transitions. Smooth energy flow. Done in
               seconds. Your audience stays locked in from start to finish.

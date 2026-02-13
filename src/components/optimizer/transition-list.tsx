@@ -50,7 +50,7 @@ export function TransitionList({ transitions }: TransitionListProps) {
           {/* BPM delta */}
           <span className="w-16 flex-shrink-0 text-right font-mono text-xs text-text-secondary">
             {t.bpmDelta > 0 ? "+" : ""}
-            {t.bpmDelta !== 0 ? t.bpmDelta.toFixed(0) : "—"} bpm
+            {t.bpmDelta !== 0 ? t.bpmDelta.toFixed(0) : "-"} bpm
           </span>
         </div>
       ))}

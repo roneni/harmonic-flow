@@ -55,7 +55,7 @@ function CompactTrackList({
                 {track.title}
               </span>
               <span className="w-14 flex-shrink-0 text-right font-mono text-xs text-text-secondary">
-                {track.bpm ?? "—"}
+                {track.bpm ?? "-"}
               </span>
               <span className="w-10 flex-shrink-0 text-center font-mono text-xs text-text-primary">
                 {displayKey}

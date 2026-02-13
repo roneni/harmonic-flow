@@ -20,7 +20,7 @@ export function Navbar() {
       <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
           <span className="text-lg font-bold text-text-primary">
-            Harmonic<span className="text-primary">Flow</span>
+            Harmony<span className="text-primary">Set</span>
           </span>
         </Link>
 
