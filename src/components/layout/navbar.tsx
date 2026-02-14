@@ -36,6 +36,17 @@ export function Navbar() {
             Optimize
           </Link>
 
+          <Link
+            href="/guides"
+            className={`text-sm font-medium transition-colors hover:text-primary ${
+              pathname?.startsWith("/guides")
+                ? "text-primary"
+                : "text-text-secondary"
+            }`}
+          >
+            Guides
+          </Link>
+
           {user && (
             <Link
               href="/dashboard"
