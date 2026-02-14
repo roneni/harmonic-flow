@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { Navbar } from "@/components/layout/navbar";
 import { AuthProvider } from "@/components/auth/auth-provider";
+import { StructuredData } from "@/components/seo/structured-data";
+import { Footer } from "@/components/landing/footer";
 import "./globals.css";
 
 const inter = Inter({
@@ -73,9 +75,11 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased bg-background text-text-primary`}
       >
+        <StructuredData />
         <AuthProvider>
           <Navbar />
           <main className="min-h-screen pt-16">{children}</main>
+          <Footer />
         </AuthProvider>
       </body>
     </html>

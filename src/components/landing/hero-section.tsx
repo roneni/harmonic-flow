@@ -13,20 +13,20 @@ export function HeroSection() {
 
       <div className="relative mx-auto max-w-4xl text-center">
         <div className="mb-6 inline-block rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary">
-          Mathematically Optimal Harmonic Mixing
+          Free DJ Set Optimizer — No Account Required
         </div>
 
         <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl">
-          Perfect Your DJ Sets with{" "}
+          DJ Playlist Optimizer for{" "}
           <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            Science
+            Harmonic Mixing
           </span>
         </h1>
 
         <p className="mx-auto mt-6 max-w-2xl text-lg text-text-secondary sm:text-xl">
-          Upload your playlist, and our algorithm finds the mathematically
-          optimal harmonic order. Every transition flows. Every key change is
-          intentional.
+          Upload your Rekordbox, Traktor, or Serato playlist — our circle of
+          fifths algorithm finds the mathematically optimal track order in
+          seconds. Every transition flows. Every key change is intentional.
         </p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">

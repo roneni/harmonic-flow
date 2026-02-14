@@ -4,7 +4,6 @@ import { HowItWorks } from "@/components/landing/how-it-works";
 import { FeaturesGrid } from "@/components/landing/features-grid";
 import { SocialProof } from "@/components/landing/social-proof";
 import { CtaSection } from "@/components/landing/cta-section";
-import { Footer } from "@/components/landing/footer";
 
 export default function HomePage() {
   return (
@@ -15,7 +14,6 @@ export default function HomePage() {
       <FeaturesGrid />
       <SocialProof />
       <CtaSection />
-      <Footer />
     </>
   );
 }
