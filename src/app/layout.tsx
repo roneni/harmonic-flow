@@ -15,18 +15,51 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.harmonyset.com"),
   title: {
-    default: "HarmonySet - DJ Playlist Optimizer",
+    default: "HarmonySet — DJ Playlist Optimizer for Harmonic Mixing",
     template: "%s | HarmonySet",
   },
   description:
-    "Mathematically optimize your DJ playlist for perfect harmonic mixing. Works with Rekordbox, Traktor, and Serato exports.",
+    "Mathematically optimize your DJ playlist for perfect harmonic mixing. Upload your Rekordbox, Traktor, or Serato export and get the optimal track order in seconds. Free, private, no account required.",
+  keywords: [
+    "DJ playlist optimizer",
+    "harmonic mixing tool",
+    "circle of fifths DJ",
+    "Rekordbox playlist order",
+    "DJ set planner",
+    "key mixing tool",
+    "BPM energy flow DJ",
+    "Traktor playlist optimizer",
+    "Serato harmonic mixing",
+    "DJ track order optimizer",
+    "harmonic mixing software free",
+  ],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "HarmonySet - DJ Playlist Optimizer",
+    title: "HarmonySet — DJ Playlist Optimizer for Harmonic Mixing",
     description:
-      "Mathematically optimize your DJ playlist for perfect harmonic mixing.",
+      "Upload your DJ playlist and get the mathematically optimal harmonic order. Works with Rekordbox, Traktor, and Serato.",
     siteName: "HarmonySet",
+    url: "https://www.harmonyset.com",
     type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "HarmonySet — DJ Playlist Optimizer for Harmonic Mixing",
+    description:
+      "Upload your DJ playlist and get the mathematically optimal harmonic order in seconds. Free and private.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
 };
 
