@@ -1,138 +1,120 @@
-// Screw-head SVG — flat-head style, used at panel corners
+// ── Official brand logo components ───────────────────────────────────────────
+// Rekordbox: path data sourced from cdn.rekordbox.com (official Pioneer DJ CDN)
+// Traktor:   path data sourced from native-instruments.com (official NI CDN)
+// Serato:    Inter 900 italic wordmark (official SVG gated behind login/CORS)
+
+// Screw-head detail — flat-head style
 function ScrewHead() {
   return (
     <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
-      <circle cx="6" cy="6" r="4.5" fill="none" stroke="#333333" strokeWidth="0.9" />
-      <line x1="3.2" y1="6" x2="8.8" y2="6" stroke="#333333" strokeWidth="0.9" strokeLinecap="round" />
+      <circle cx="6" cy="6" r="4.5" fill="none" stroke="#2e2e2e" strokeWidth="0.9" />
+      <line x1="3.2" y1="6" x2="8.8" y2="6" stroke="#2e2e2e" strokeWidth="0.9" strokeLinecap="round" />
     </svg>
   );
 }
 
-// ── Simplified monochrome brand icons ─────────────────────────────────────────
-// Stylised geometric representations (not official brand assets).
-// Swap src paths for official brand SVGs when available.
-
-function RekordboxIcon() {
-  // Diamond shape — references Pioneer's Rekordbox diamond motif
+// Rekordbox wordmark + cube icon — white, transparent bg
+// Source: cdn.rekordbox.com/home-2022/v10/img/2022/common/logo/rekordbox.svg
+function RekordboxLogo() {
   return (
-    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-      <polygon
-        points="11,2 20,11 11,20 2,11"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinejoin="round"
-      />
-      <polygon
-        points="11,6 16,11 11,16 6,11"
-        stroke="currentColor"
-        strokeWidth="1"
-        strokeLinejoin="round"
-        opacity="0.5"
-      />
+    <svg
+      viewBox="0 0 180 26"
+      height="30"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="Rekordbox"
+      style={{ display: "block" }}
+    >
+      <path d="M18.115 11.405c.249.729.385 1.506.385 2.316 0 3.51-2.5 6.437-5.811 7.094v5.09l8.913-5.146c.57-.329.922-.938.922-1.603v-10.3l-4.409 2.549ZM5.843 8.943a7.217 7.217 0 0 1 5.419-2.452c2.156 0 4.096.954 5.418 2.452l4.41-2.548-8.906-5.147a1.862 1.862 0 0 0-1.852 0L1.42 6.395l4.408 2.548h.016Zm-1.819 4.778c0-.81.136-1.587.385-2.316L0 8.855v10.293c0 .657.353 1.274.922 1.603l8.913 5.146v-5.09a7.227 7.227 0 0 1-5.811-7.094v.008Zm10.861-.001a3.62 3.62 0 0 1-3.623 3.624 3.62 3.62 0 0 1-3.623-3.623 3.62 3.62 0 0 1 3.623-3.623 3.62 3.62 0 0 1 3.623 3.623ZM118.664 1.272v4.922h-5.795a23.04 23.04 0 0 0-3.712.305c-1.971.32-3.19 2.156-3.358 3.984a33.528 33.528 0 0 0 0 6.476c.168 1.828 1.387 3.655 3.358 3.984 1.235.2 2.461.304 3.712.304 3.198 0 6.396.009 9.594.017V1.272h-3.799Zm0 16.954h-4.665c-4.04 0-4.561-.513-4.561-4.513s.521-4.513 4.561-4.513h4.665v9.026Zm23.63-7.751c-.168-1.828-1.386-3.656-3.358-3.984a23.038 23.038 0 0 0-3.712-.305h-5.795V1.272h-3.799v19.976c3.198 0 6.396-.009 9.594-.017 1.251 0 2.477-.096 3.712-.304 1.972-.32 3.19-2.156 3.358-3.984a33.53 33.53 0 0 0 0-6.477v.009Zm-8.2 7.75h-4.665V9.2h4.665c4.04 0 4.561.513 4.561 4.513s-.521 4.513-4.561 4.513Zm-42.699-7.822c-.225-2.052-1.836-3.688-3.912-3.984a30.594 30.594 0 0 0-8.64 0c-2.077.288-3.688 1.932-3.912 3.984a30.69 30.69 0 0 0 0 6.645c.224 2.052 1.835 3.687 3.911 3.984 2.91.408 5.731.408 8.641 0 2.076-.29 3.687-1.932 3.912-3.984a30.69 30.69 0 0 0 0-6.645Zm-3.751 5.747c-.08.834-.393 1.339-1.13 1.755-.562.329-1.139.321-1.748.353-1.339.08-2.661.056-4-.056-.906-.08-1.419-.417-1.836-1.21-.28-.53-.272-1.067-.304-1.62a27.966 27.966 0 0 1 .056-4.096c.08-.833.393-1.338 1.13-1.755.561-.32 1.138-.32 1.748-.353a27.764 27.764 0 0 1 4 .056c.905.08 1.418.417 1.835 1.21.28.53.273 1.067.305 1.62a29.11 29.11 0 0 1-.056 4.096Zm73.688-5.747c-.225-2.052-1.836-3.688-3.912-3.984a30.595 30.595 0 0 0-8.641 0c-2.076.288-3.687 1.932-3.912 3.984a30.754 30.754 0 0 0 0 6.645c.225 2.052 1.836 3.687 3.912 3.984 2.91.408 5.731.408 8.641 0 2.076-.29 3.687-1.932 3.912-3.984.24-2.173.24-4.473 0-6.645Zm-3.752 5.747c-.08.834-.393 1.339-1.13 1.755-.561.329-1.138.321-1.747.353a27.82 27.82 0 0 1-4-.056c-.906-.08-1.419-.417-1.836-1.21-.28-.53-.272-1.067-.304-1.62a27.73 27.73 0 0 1 .056-4.096c.08-.833.392-1.338 1.13-1.755.561-.32 1.138-.32 1.747-.353a27.765 27.765 0 0 1 4 .056c.906.08 1.419.417 1.836 1.21.28.53.272 1.067.304 1.62.08 1.314.056 2.79-.056 4.096ZM100.1 9.312c-.289.048-.57.12-.85.28a3.098 3.098 0 0 0-.497.354c-.2.184-.353.4-.457.649-.136.32-.168.665-.192 1.01-.064.737-.048 1.475-.048 2.22v7.415h-3.864v-7.527c0-1.082.056-2.156.177-3.238 0-.505.232-1.083.456-1.523.233-.465.553-.89.93-1.25a4.79 4.79 0 0 1 1.339-.883c.609-.256 1.266-.352 1.916-.44a15.412 15.412 0 0 1 1.603-.12c1.066-.04 3.671-.097 3.671-.097v3.022s-2.998-.064-4.184.128Zm-64.983 0c-.289.048-.57.12-.85.28a3.094 3.094 0 0 0-.497.354c-.2.184-.353.4-.457.649-.136.32-.168.665-.192 1.01-.064.737-.048 1.475-.048 2.22v7.415h-3.864v-7.527c0-1.082.056-2.156.177-3.238 0-.505.232-1.083.457-1.523a4.58 4.58 0 0 1 .93-1.25 4.79 4.79 0 0 1 1.338-.883c.61-.256 1.266-.352 1.916-.44a15.242 15.242 0 0 1 1.603-.12c1.066-.04 3.671-.097 3.671-.097v3.022s-2.998-.064-4.184.128Zm31.613 4.409 7.647-7.527h-4.2l-5.603 6.02h-.4v-6.02H60.35v15.054h3.824V15.22h.392l5.611 6.028h4.2l-7.654-7.527h.008ZM180 6.194h-4.2l-4.81 5.243-4.817-5.243h-4.2l6.909 7.527-6.909 7.527h4.2l4.817-5.242 4.81 5.242h4.2l-6.91-7.527L180 6.194ZM57.312 16.815h-3.815c-.032.112-.096.32-.096.32-.233.65-.586.922-1.275 1.002a27.925 27.925 0 0 1-6.124 0 1.517 1.517 0 0 1-1.347-1.322 30.491 30.491 0 0 1-.168-2.421h12.985v-.449a29.333 29.333 0 0 0-.176-3.559c-.224-2.052-1.835-3.687-3.911-3.984a30.594 30.594 0 0 0-8.641 0c-2.076.289-3.688 1.932-3.912 3.984a30.69 30.69 0 0 0 0 6.645c.224 2.052 1.836 3.687 3.912 3.984 2.91.409 5.73.409 8.64 0 .193-.024.377-.064.562-.112.184-.048.36-.113.537-.177a4.564 4.564 0 0 0 1.395-.89c.136-.128.264-.256.376-.4a4.312 4.312 0 0 0 .601-.922c.12-.24.217-.489.289-.745.072-.257.112-.521.144-.786 0-.048.016-.096.016-.152l.008-.016Zm-12.648-6.22a1.516 1.516 0 0 1 1.346-1.323 27.935 27.935 0 0 1 6.124 0c.705.08 1.267.625 1.347 1.322.056.514.104 1.019.136 1.532h-9.082a19.38 19.38 0 0 1 .137-1.531h-.008Z" />
     </svg>
   );
 }
 
-function SeratoIcon() {
-  // Two parallel waveform arcs — references Serato's wave identity
+// Traktor wordmark only (no PRO 4 suffix) — clipped at x=637 before separator
+// Source: native-instruments.com (official NI CDN), path trimmed to TRAKTOR
+function TraktorLogo() {
   return (
-    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-      <path
-        d="M3 8 Q7 3 11 8 Q15 13 19 8"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M3 14 Q7 9 11 14 Q15 19 19 14"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+    <svg
+      viewBox="0 0 637 70"
+      height="28"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="Traktor"
+      style={{ display: "block" }}
+    >
+      <path d="M0,26.46h34.91v42h16.26V26.46h34.91v-13.79H0v13.79ZM228.34,12.67h-17.85l-37.54,55.79h19.13l8.5-13.07h41.99l8.5,13.07h19.13l-37.54-55.79h-4.3ZM208.5,43.2l11.92-18.33h2.3l11.92,18.33h-26.13ZM350.44,25.42v-14.35l-59.38,15.54v-13.95h-16.1v55.79h16.1v-12.19l59.46,13.79v-14.35l-62.33-14.27,62.25-16.02ZM160.95,42.6c2.74-1.2,4.89-2.99,6.46-5.38,1.57-2.39,2.35-5.29,2.35-8.69,0-5.05-1.66-8.95-4.98-11.72-3.32-2.76-7.74-4.14-13.27-4.14h-59.46v55.79h15.86v-10.52l61.69,12.11v-13.39l-65.11-12.27h47.02c3.56,0,6.71-.6,9.44-1.79ZM107.91,33.23v-7.81h40.57c1.28,0,2.32.35,3.15,1.04.82.69,1.24,1.65,1.24,2.87s-.41,2.18-1.24,2.87c-.82.69-1.87,1.04-3.15,1.04h-40.57ZM516.81,14.74c-7.47-2.44-16.22-3.67-26.26-3.67s-18.8,1.22-26.26,3.67c-7.47,2.44-13.22,5.89-17.25,10.32-4.04,4.44-6.06,9.6-6.06,15.5s2.02,11.07,6.06,15.5c4.04,4.44,9.79,7.88,17.25,10.32,7.46,2.44,16.22,3.67,26.26,3.67s18.8-1.22,26.26-3.67c7.46-2.44,13.22-5.88,17.25-10.32,4.04-4.44,6.06-9.6,6.06-15.5s-2.02-11.07-6.06-15.5c-4.04-4.44-9.79-7.88-17.25-10.32ZM519.32,48.78c-2.5,2.34-6.18,4.17-11.04,5.5-4.86,1.33-10.77,1.99-17.73,1.99s-12.87-.66-17.73-1.99c-4.86-1.33-8.54-3.16-11.04-5.5-2.5-2.34-3.75-5.07-3.75-8.21s1.25-5.87,3.75-8.21c2.5-2.34,6.18-4.17,11.04-5.5,4.86-1.33,10.77-1.99,17.73-1.99s12.87.67,17.73,1.99c4.86,1.33,8.54,3.16,11.04,5.5,2.5,2.34,3.75,5.08,3.75,8.21s-1.25,5.87-3.75,8.21ZM615.4,42.6c2.74-1.2,4.89-2.99,6.46-5.38,1.57-2.39,2.35-5.29,2.35-8.69,0-5.05-1.66-8.95-4.98-11.72-3.32-2.76-7.74-4.14-13.27-4.14h-59.46v55.79h15.86v-10.52l61.69,12.11v-13.39l-65.12-12.27h47.02c3.56,0,6.71-.6,9.44-1.79ZM562.36,33.23v-7.81h40.57c1.27,0,2.32.35,3.15,1.04.82.69,1.24,1.65,1.24,2.87s-.41,2.18-1.24,2.87c-.82.69-1.87,1.04-3.15,1.04h-40.57ZM440.98,12.67h-86.08v13.79h34.91v42h16.26V26.46h34.91v-13.79Z" />
     </svg>
   );
 }
 
-function TraktorIcon() {
-  // Crosshair target — references Native Instruments Traktor mark
+// Serato: Inter 900 italic wordmark
+// (Official SVG requires authenticated Serato account — this matches the brand style)
+function SeratoLogo() {
   return (
-    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-      <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="1.4" />
-      <circle cx="11" cy="11" r="2.5" fill="currentColor" />
-      <line x1="11" y1="1"  x2="11" y2="5.5"  stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-      <line x1="11" y1="16.5" x2="11" y2="21" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-      <line x1="1"  y1="11" x2="5.5"  y2="11" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-      <line x1="16.5" y1="11" x2="21" y2="11" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-    </svg>
+    <span
+      aria-label="Serato"
+      style={{
+        fontFamily: "Inter, ui-sans-serif, sans-serif",
+        fontWeight: 900,
+        fontStyle: "italic",
+        fontSize: "26px",
+        letterSpacing: "-0.04em",
+        lineHeight: 1,
+        display: "block",
+        color: "currentColor",
+      }}
+    >
+      serato
+    </span>
   );
 }
 
-const BRANDS = [
-  { name: "Rekordbox", Icon: RekordboxIcon },
-  { name: "Serato",    Icon: SeratoIcon    },
-  { name: "Traktor",   Icon: TraktorIcon   },
-] as const;
-
-// ── Component ─────────────────────────────────────────────────────────────────
+// ── Integration bar ───────────────────────────────────────────────────────────
 export function IntegrationBar() {
   return (
     <div
       style={{
-        background: "#141414",
-        borderTop:    "1px solid #272727",
-        borderBottom: "1px solid #272727",
+        background: "#111111",
+        borderTop: "1px solid #222222",
+        borderBottom: "1px solid #222222",
       }}
     >
-      {/* Rack-mount panel */}
       <div
         className="relative mx-auto flex items-center"
-        style={{
-          maxWidth: 1280,
-          height: 72,
-          paddingLeft: 28,
-          paddingRight: 28,
-        }}
+        style={{ maxWidth: 1280, height: 96, paddingLeft: 32, paddingRight: 32 }}
       >
-        {/* ── Corner screw heads ─────────────────────────────────────────── */}
-        <span className="absolute top-3 left-4">    <ScrewHead /></span>
-        <span className="absolute bottom-3 left-4">  <ScrewHead /></span>
-        <span className="absolute top-3 right-4">   <ScrewHead /></span>
-        <span className="absolute bottom-3 right-4"><ScrewHead /></span>
+        {/* Corner screw heads */}
+        <span className="absolute top-3.5 left-5">  <ScrewHead /></span>
+        <span className="absolute bottom-3.5 left-5"><ScrewHead /></span>
+        <span className="absolute top-3.5 right-5">  <ScrewHead /></span>
+        <span className="absolute bottom-3.5 right-5"><ScrewHead /></span>
 
-        {/* ── Panel label ────────────────────────────────────────────────── */}
+        {/* Panel label */}
         <span
-          className="hidden sm:block shrink-0 text-xs font-bold tracking-widest uppercase"
-          style={{ color: "#444444", letterSpacing: "0.18em", minWidth: 140 }}
+          className="hidden lg:block shrink-0 text-xs font-bold tracking-widest uppercase"
+          style={{ color: "#333333", letterSpacing: "0.2em", minWidth: 148 }}
         >
           Pro Integration
         </span>
 
-        {/* ── Separator rule ─────────────────────────────────────────────── */}
+        {/* Separator rule */}
         <span
-          className="hidden sm:block shrink-0 mx-6"
-          style={{ width: 1, height: 32, background: "#272727" }}
+          className="hidden lg:block shrink-0 mx-8"
+          style={{ width: 1, height: 36, background: "#222222" }}
           aria-hidden="true"
         />
 
-        {/* ── Brand logos ────────────────────────────────────────────────── */}
-        <div className="flex items-center justify-center sm:justify-start gap-10 flex-1">
-          {BRANDS.map(({ name, Icon }) => (
-            <div
-              key={name}
-              className="flex items-center gap-2.5"
-              style={{ color: "#666666" }}
-            >
-              <Icon />
-              <span
-                className="text-xs font-semibold tracking-widest uppercase"
-                style={{ letterSpacing: "0.14em" }}
-              >
-                {name}
-              </span>
-            </div>
-          ))}
+        {/* Three brand logos — evenly spaced, centred */}
+        <div className="flex items-center justify-center flex-1 gap-16 md:gap-20 lg:gap-24">
+          <div style={{ color: "#bbbbbb" }}>
+            <RekordboxLogo />
+          </div>
+          <div style={{ color: "#bbbbbb" }}>
+            <SeratoLogo />
+          </div>
+          <div style={{ color: "#bbbbbb" }}>
+            <TraktorLogo />
+          </div>
         </div>
       </div>
     </div>
