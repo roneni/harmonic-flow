@@ -4,51 +4,54 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 // ---------------------------------------------------------------------------
-// VIDEO CONFIG
-// Replace VIDEO_ID values with the actual YouTube video IDs from the
-// Psychedelic Universe channel once you have them.
+// VIDEO CONFIG — Psychedelic Universe channel
 // The fallback view counts display immediately; live counts load via the API.
 // ---------------------------------------------------------------------------
 const VIDEOS: VideoEntry[] = [
   {
-    id: "VIDEO_ID_1", // Back to Goa | Retro Goa Trance DJ Mix
+    id: "rrdQIQXQF8I",
     title: "Back to Goa | Retro Goa Trance DJ Mix",
     fallbackViews: 479437,
   },
   {
-    id: "VIDEO_ID_2", // Dreaming of Goa | Tribute to Goa DJ Mix
+    id: "sn0pgbuKfUY",
     title: "Dreaming of Goa | Tribute to Goa DJ Mix",
     fallbackViews: 206553,
   },
   {
-    id: "VIDEO_ID_3", // January 2022 Progressive Psytrance DJ Mix
+    id: "PRdcytOMvn4",
     title: "January 2022 Progressive Psytrance DJ Mix",
     fallbackViews: 172813,
   },
   {
-    id: "VIDEO_ID_4", // Vini Vici - Life Is a Remix DJ Mix
+    id: "PZe5PqUDjBU",
     title: "Vini Vici - Life Is a Remix DJ Mix",
     fallbackViews: 100330,
   },
   {
-    id: "VIDEO_ID_5", // Psychedelic Soul - Liquid Soul Best Of Ever DJ Mix
+    id: "2rYGCA7bdFU",
     title: "Psychedelic Soul - Liquid Soul Best Of Ever DJ Mix",
     fallbackViews: 96680,
   },
   {
-    id: "VIDEO_ID_6", // ProtonMix | Protonica Best Tracks Ever DJ Mix
+    id: "hdNoYygg2aI",
     title: "ProtonMix | Protonica Best Tracks Ever DJ Mix",
     fallbackViews: 74543,
   },
   {
-    id: "VIDEO_ID_7", // Best of Captain Hook | Progressive Psytrance DJ Mix
+    id: "K_66Gnv7wKY",
     title: "Best of Captain Hook | Progressive Psytrance DJ Mix",
     fallbackViews: 73208,
   },
   {
-    id: "VIDEO_ID_8", // June 2023 Progressive Psytrance DJ Mix
+    id: "UwHkETjnSq0",
     title: "June 2023 Progressive Psytrance DJ Mix",
     fallbackViews: 66524,
+  },
+  {
+    id: "c2ExXW1SpGM",
+    title: "June 2022 Progressive Psytrance DJ Mix",
+    fallbackViews: 0,
   },
 ];
 
@@ -73,29 +76,7 @@ function formatViews(count: number): string {
 }
 
 function ThumbnailImage({ videoId, title }: { videoId: string; title: string }) {
-  const isPlaceholder = videoId.startsWith("VIDEO_ID_");
-  const src = isPlaceholder
-    ? null
-    : `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
-
-  if (!src) {
-    // Render a styled placeholder when video ID hasn't been set yet
-    return (
-      <div
-        className="flex items-center justify-center text-xs font-mono shrink-0"
-        style={{
-          width: 160,
-          height: 90,
-          background: "#1a1a1a",
-          border: "1px solid #2a2a2a",
-          color: "#555555",
-          borderRadius: 4,
-        }}
-      >
-        <span>[ thumbnail ]</span>
-      </div>
-    );
-  }
+  const src = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
 
   return (
     <div
@@ -122,14 +103,12 @@ function VideoCard({
   liveViews?: number;
 }) {
   const viewCount = liveViews ?? entry.fallbackViews;
-  const videoUrl = entry.id.startsWith("VIDEO_ID_")
-    ? "#"
-    : `https://www.youtube.com/watch?v=${entry.id}`;
+  const videoUrl = `https://www.youtube.com/watch?v=${entry.id}`;
 
   return (
     <a
       href={videoUrl}
-      target={videoUrl === "#" ? undefined : "_blank"}
+      target="_blank"
       rel="noopener noreferrer"
       className="flex flex-col gap-2 shrink-0 group"
       style={{ width: 200 }}
