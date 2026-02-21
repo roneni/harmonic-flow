@@ -1,11 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/auth/auth-provider";
 
 export function Navbar() {
-  const pathname = usePathname();
   const router = useRouter();
   const { user, profile, loading, signOut } = useAuth();
 
@@ -16,71 +15,90 @@ export function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 h-16 border-b border-text-secondary/10 bg-background/80 backdrop-blur-md">
-      <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-lg font-bold text-text-primary">
-            Harmony<span className="text-primary">Set</span>
+    <nav
+      style={{ background: "#0a0a0a", borderBottom: "1px solid #1f1f1f" }}
+      className="fixed top-0 left-0 right-0 z-50 h-16"
+    >
+      <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-6">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2 shrink-0">
+          <span className="text-base font-bold tracking-tight text-white">
+            Harmony<span style={{ color: "#84cc16" }}>Set</span>
           </span>
         </Link>
 
-        <div className="flex items-center gap-6">
+        {/* Center nav links */}
+        <div className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
           <Link
-            href="/optimize"
-            className={`text-sm font-medium transition-colors hover:text-primary ${
-              pathname === "/optimize"
-                ? "text-primary"
-                : "text-text-secondary"
-            }`}
+            href="/#features"
+            className="text-sm font-medium transition-colors hover:text-white"
+            style={{ color: "#888888" }}
           >
-            Optimize
+            Features
           </Link>
-
           <Link
-            href="/guides"
-            className={`text-sm font-medium transition-colors hover:text-primary ${
-              pathname?.startsWith("/guides")
-                ? "text-primary"
-                : "text-text-secondary"
-            }`}
+            href="/#how-it-works"
+            className="text-sm font-medium transition-colors hover:text-white"
+            style={{ color: "#888888" }}
           >
-            Guides
+            How It Works
           </Link>
+          <Link
+            href="/#pricing"
+            className="text-sm font-medium transition-colors hover:text-white"
+            style={{ color: "#888888" }}
+          >
+            Pricing
+          </Link>
+          <Link
+            href="/#support"
+            className="text-sm font-medium transition-colors hover:text-white"
+            style={{ color: "#888888" }}
+          >
+            Support
+          </Link>
+        </div>
 
-          {user && (
-            <Link
-              href="/dashboard"
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                pathname === "/dashboard"
-                  ? "text-primary"
-                  : "text-text-secondary"
-              }`}
-            >
-              Dashboard
-            </Link>
-          )}
-
+        {/* Right side auth */}
+        <div className="flex items-center gap-3 shrink-0">
           {loading ? (
-            <div className="h-8 w-20 animate-pulse rounded-lg bg-surface" />
+            <div
+              className="h-8 w-20 animate-pulse rounded"
+              style={{ background: "#1a1a1a" }}
+            />
           ) : user ? (
-            <div className="flex items-center gap-3">
-              <span className="text-sm text-text-secondary">
+            <>
+              <span className="hidden sm:block text-sm" style={{ color: "#888888" }}>
                 {profile?.display_name || user.email?.split("@")[0]}
               </span>
               <button
                 onClick={handleSignOut}
-                className="rounded-lg border border-text-secondary/20 px-3 py-1.5 text-sm font-medium text-text-secondary transition-colors hover:border-clash/40 hover:text-clash"
+                className="text-sm font-medium transition-colors hover:text-white"
+                style={{ color: "#888888" }}
               >
                 Log Out
               </button>
-            </div>
+            </>
           ) : (
-            <Link
-              href="/login"
-              className="rounded-lg border border-text-secondary/20 px-4 py-1.5 text-sm font-medium text-text-secondary transition-colors hover:border-primary hover:text-primary"
-            >
-              Log In
-            </Link>
+            <>
+              <Link
+                href="/login"
+                className="text-sm font-medium transition-colors hover:text-white"
+                style={{ color: "#888888" }}
+              >
+                Log In
+              </Link>
+              <Link
+                href="/signup"
+                className="text-sm font-medium px-4 py-1.5 rounded transition-all hover:bg-primary/10"
+                style={{
+                  color: "#84cc16",
+                  border: "1px solid #84cc16",
+                }}
+              >
+                Sign Up
+              </Link>
+            </>
           )}
         </div>
       </div>

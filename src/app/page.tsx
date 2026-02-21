@@ -1,3 +1,4 @@
+import { YouTubeStrip } from "@/components/landing/youtube-strip";
 import { HeroSection } from "@/components/landing/hero-section";
 import { ProblemSection } from "@/components/landing/problem-section";
 import { HowItWorks } from "@/components/landing/how-it-works";
@@ -8,6 +9,7 @@ import { CtaSection } from "@/components/landing/cta-section";
 export default function HomePage() {
   return (
     <>
+      <YouTubeStrip />
       <HeroSection />
       <ProblemSection />
       <HowItWorks />
