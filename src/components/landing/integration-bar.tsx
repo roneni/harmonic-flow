@@ -6,12 +6,15 @@
 // filter: brightness(0) invert(1) forces every logo to pure #ffffff regardless
 // of its original fill colour. Static local files — nothing to break at runtime.
 
-// Screw-head detail — flat-head style
+import { BRUSHED_METAL_BG } from "./studio-input-upload";
+
+// ── Screw head — matches studio-input-upload.tsx ──────────────────────────
 function ScrewHead() {
   return (
-    <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
-      <circle cx="6" cy="6" r="4.5" fill="none" stroke="#2e2e2e" strokeWidth="0.9" />
-      <line x1="3.2" y1="6" x2="8.8" y2="6" stroke="#2e2e2e" strokeWidth="0.9" strokeLinecap="round" />
+    <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+      <circle cx="7" cy="7" r="6"   fill="#181818" stroke="#3c3c3c" strokeWidth="0.9" />
+      <circle cx="7" cy="7" r="3.8" fill="none"    stroke="#2a2a2a" strokeWidth="0.6" />
+      <line x1="3.4" y1="7" x2="10.6" y2="7" stroke="#505050" strokeWidth="1.3" strokeLinecap="round" />
     </svg>
   );
 }
@@ -23,30 +26,43 @@ const LOGO_STYLE: React.CSSProperties = {
   filter: "brightness(0) invert(1)",
 };
 
-// ── Integration bar ───────────────────────────────────────────────────────────
+// ── Integration bar ────────────────────────────────────────────────────────
 export function IntegrationBar() {
   return (
     <div
       style={{
-        background: "#111111",
-        borderTop: "1px solid #222222",
-        borderBottom: "1px solid #222222",
+        background:   BRUSHED_METAL_BG,
+        borderTop:    "2px solid #3c3c3c",
+        borderBottom: "2px solid #0e0e0e",
+        boxShadow:    "inset 0 2px 0 rgba(255,255,255,0.055), inset 0 -2px 0 rgba(0,0,0,0.55)",
       }}
     >
+      {/* Top rack rail */}
+      <div style={{ height: 7, background: "linear-gradient(180deg,#141414,#1e1e1e)", borderBottom: "1px solid #2a2a2a" }} />
+
       <div
         className="relative mx-auto flex items-center"
-        style={{ maxWidth: 1280, height: 96, paddingLeft: 32, paddingRight: 32 }}
+        style={{ maxWidth: 1280, height: 116, paddingLeft: 32, paddingRight: 32 }}
       >
         {/* Corner screw heads */}
-        <span className="absolute top-3.5 left-5">  <ScrewHead /></span>
-        <span className="absolute bottom-3.5 left-5"><ScrewHead /></span>
-        <span className="absolute top-3.5 right-5">  <ScrewHead /></span>
-        <span className="absolute bottom-3.5 right-5"><ScrewHead /></span>
+        <span className="absolute top-3 left-5">  <ScrewHead /></span>
+        <span className="absolute bottom-3 left-5"><ScrewHead /></span>
+        <span className="absolute top-3 right-5">  <ScrewHead /></span>
+        <span className="absolute bottom-3 right-5"><ScrewHead /></span>
 
-        {/* Panel label */}
+        {/* Panel label — same monospace style as Studio Input Upload header */}
         <span
-          className="hidden lg:block shrink-0 text-xs font-bold tracking-widest uppercase"
-          style={{ color: "#888888", letterSpacing: "0.2em", minWidth: 148 }}
+          className="hidden lg:block shrink-0"
+          style={{
+            color:         "#ffffff",
+            fontSize:      13,
+            fontWeight:    700,
+            letterSpacing: "0.35em",
+            textTransform: "uppercase",
+            fontFamily:    "var(--font-mono)",
+            textShadow:    "0 0 12px rgba(255,255,255,0.18)",
+            minWidth:      156,
+          }}
         >
           Pro Integration
         </span>
@@ -54,32 +70,23 @@ export function IntegrationBar() {
         {/* Separator rule */}
         <span
           className="hidden lg:block shrink-0 mx-8"
-          style={{ width: 1, height: 36, background: "#222222" }}
+          style={{ width: 1, height: 40, background: "#2a2a2a", boxShadow: "1px 0 0 #111" }}
           aria-hidden="true"
         />
 
         {/* Three brand logos — evenly spaced, identical height + filter */}
         <div className="flex items-center justify-center flex-1 gap-16 md:gap-20 lg:gap-24">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/logos/rekordbox.svg"
-            alt="Rekordbox"
-            style={LOGO_STYLE}
-          />
+          <img src="/logos/rekordbox.svg" alt="Rekordbox" style={LOGO_STYLE} />
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/logos/serato.svg"
-            alt="Serato"
-            style={LOGO_STYLE}
-          />
+          <img src="/logos/serato.svg"    alt="Serato"    style={LOGO_STYLE} />
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/logos/traktor.svg"
-            alt="Traktor"
-            style={LOGO_STYLE}
-          />
+          <img src="/logos/traktor.svg"   alt="Traktor"   style={LOGO_STYLE} />
         </div>
       </div>
+
+      {/* Bottom rack rail */}
+      <div style={{ height: 7, background: "linear-gradient(0deg,#141414,#1e1e1e)", borderTop: "1px solid #2a2a2a" }} />
     </div>
   );
 }
