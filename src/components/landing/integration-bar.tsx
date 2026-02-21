@@ -64,7 +64,7 @@ export function IntegrationBar() {
             minWidth:      156,
           }}
         >
-          Pro Integration
+          Compatible With
         </span>
 
         {/* Separator rule */}
