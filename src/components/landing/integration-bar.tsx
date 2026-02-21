@@ -46,7 +46,7 @@ export function IntegrationBar() {
         {/* Panel label */}
         <span
           className="hidden lg:block shrink-0 text-xs font-bold tracking-widest uppercase"
-          style={{ color: "#333333", letterSpacing: "0.2em", minWidth: 148 }}
+          style={{ color: "#888888", letterSpacing: "0.2em", minWidth: 148 }}
         >
           Pro Integration
         </span>
