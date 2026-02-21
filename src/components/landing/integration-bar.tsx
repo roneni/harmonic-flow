@@ -1,13 +1,10 @@
-// ── Brand wordmarks — plain text, Google Fonts, no SVG ───────────────────────
-// rekordbox → Barlow 500   (geometric grotesque, close to Pioneer DJ's typeface)
-// serato    → Nunito 800   (rounded geometric bold, close to Serato's Gilroy)
-// TRAKTOR   → Bebas Neue  (condensed display caps, close to NI's typeface)
-
-import { Barlow, Nunito, Bebas_Neue } from "next/font/google";
-
-const rekordboxFont = Barlow({ subsets: ["latin"], weight: "500" });
-const seratoFont = Nunito({ subsets: ["latin"], weight: "800" });
-const traktorFont = Bebas_Neue({ subsets: ["latin"], weight: "400" });
+// ── Integration bar — self-hosted SVG logos via <img> + CSS filter ────────────
+// /public/logos/rekordbox.svg — path data from official Pioneer DJ CDN
+// /public/logos/traktor.svg   — path data from official NI CDN
+// /public/logos/serato.svg    — SVG text (official Serato SVG is auth-gated)
+//
+// filter: brightness(0) invert(1) forces every logo to pure #ffffff regardless
+// of its original fill colour. Static local files — nothing to break at runtime.
 
 // Screw-head detail — flat-head style
 function ScrewHead() {
@@ -18,6 +15,13 @@ function ScrewHead() {
     </svg>
   );
 }
+
+const LOGO_STYLE: React.CSSProperties = {
+  height: 32,
+  width: "auto",
+  display: "block",
+  filter: "brightness(0) invert(1)",
+};
 
 // ── Integration bar ───────────────────────────────────────────────────────────
 export function IntegrationBar() {
@@ -54,46 +58,26 @@ export function IntegrationBar() {
           aria-hidden="true"
         />
 
-        {/* Three brand wordmarks — evenly spaced, identical size and colour */}
+        {/* Three brand logos — evenly spaced, identical height + filter */}
         <div className="flex items-center justify-center flex-1 gap-16 md:gap-20 lg:gap-24">
-          <span
-            style={{
-              ...rekordboxFont.style,
-              fontWeight: 500,
-              fontSize: 28,
-              lineHeight: 1,
-              color: "#ffffff",
-              letterSpacing: "-0.03em",
-            }}
-          >
-            rekordbox
-          </span>
-
-          <span
-            style={{
-              ...seratoFont.style,
-              fontWeight: 800,
-              fontSize: 28,
-              lineHeight: 1,
-              color: "#ffffff",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            serato
-          </span>
-
-          <span
-            style={{
-              ...traktorFont.style,
-              fontWeight: 400,
-              fontSize: 28,
-              lineHeight: 1,
-              color: "#ffffff",
-              letterSpacing: "0.05em",
-            }}
-          >
-            TRAKTOR
-          </span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logos/rekordbox.svg"
+            alt="Rekordbox"
+            style={LOGO_STYLE}
+          />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logos/serato.svg"
+            alt="Serato"
+            style={LOGO_STYLE}
+          />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logos/traktor.svg"
+            alt="Traktor"
+            style={LOGO_STYLE}
+          />
         </div>
       </div>
     </div>
