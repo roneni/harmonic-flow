@@ -1,7 +1,8 @@
-// ── Official brand logo components ───────────────────────────────────────────
-// Rekordbox: path data sourced from cdn.rekordbox.com (official Pioneer DJ CDN)
-// Traktor:   path data sourced from native-instruments.com (official NI CDN)
-// Serato:    Inter 900 italic wordmark (official SVG gated behind login/CORS)
+// ── Brand logo components — all at 28px height, currentColor fill ─────────────
+// Rekordbox: path data from cdn.rekordbox.com (official Pioneer DJ CDN)
+// Traktor:   path data from native-instruments.com (official NI CDN)
+// Serato:    SVG text wordmark (official SVG gated behind login/CORS)
+// Simple Icons does not include Rekordbox, Serato, or Traktor.
 
 // Screw-head detail — flat-head style
 function ScrewHead() {
@@ -19,7 +20,7 @@ function RekordboxLogo() {
   return (
     <svg
       viewBox="0 0 180 26"
-      height="30"
+      height="28"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
       aria-label="Rekordbox"
@@ -47,25 +48,29 @@ function TraktorLogo() {
   );
 }
 
-// Serato: Inter 900 italic wordmark
-// (Official SVG requires authenticated Serato account — this matches the brand style)
+// Serato wordmark — inline SVG text (official brand SVG is login-gated)
+// Matches Serato's visual style: bold lowercase sans-serif
 function SeratoLogo() {
   return (
-    <span
+    <svg
+      viewBox="0 0 140 28"
+      height="28"
+      xmlns="http://www.w3.org/2000/svg"
       aria-label="Serato"
-      style={{
-        fontFamily: "Inter, ui-sans-serif, sans-serif",
-        fontWeight: 900,
-        fontStyle: "italic",
-        fontSize: "26px",
-        letterSpacing: "-0.04em",
-        lineHeight: 1,
-        display: "block",
-        color: "currentColor",
-      }}
+      style={{ display: "block", overflow: "visible" }}
     >
-      serato
-    </span>
+      <text
+        x="0"
+        y="22"
+        fill="currentColor"
+        fontFamily="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        fontWeight="800"
+        fontSize="26"
+        letterSpacing="-0.5"
+      >
+        serato
+      </text>
+    </svg>
   );
 }
 
