@@ -96,12 +96,12 @@ export function StudioInputUpload() {
       <div style={{ height: 7, background: "linear-gradient(180deg,#111,#1e1e1c)", borderBottom: "1px solid #2a2a28" }} />
 
       {/* Centre the silver plate */}
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "clamp(24px,3vw,44px) clamp(32px,4vw,64px)" }}>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "clamp(16px,2vw,32px) clamp(20px,2.5vw,40px)" }}>
 
         {/* ═══ SILVER PLATE ═══ */}
         <div style={{
           position:      "relative",
-          width:         "clamp(380px, 52vw, 660px)",
+          width:         "clamp(460px, 60vw, 740px)",
           background:    [
             "repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(0,0,0,0.035) 2px, rgba(0,0,0,0.035) 3px)",
             "linear-gradient(160deg, #dddbd5 0%, #c0beb8 18%, #d2d0ca 40%, #b8b6b0 62%, #cac8c2 80%, #d8d6d0 100%)",
@@ -112,11 +112,11 @@ export function StudioInputUpload() {
           borderRight:   "2px solid #929088",
           borderBottom:  "2px solid #868480",
           boxShadow:     "inset 0 1px 0 rgba(255,255,255,0.6), inset 0 -1px 0 rgba(0,0,0,0.15), 4px 4px 18px rgba(0,0,0,0.65), 0 1px 0 rgba(255,255,255,0.05)",
-          padding:       "clamp(28px,3.5vw,44px)",
+          padding:       "clamp(16px,2vw,24px)",
           display:       "flex",
           flexDirection: "column",
           alignItems:    "center",
-          gap:           "clamp(12px,1.4vw,18px)",
+          gap:           "clamp(8px,1vw,14px)",
         }}>
 
           {/* Corner screws — on the silver plate */}
@@ -128,8 +128,8 @@ export function StudioInputUpload() {
           {/* Header — engraved on silver */}
           <p style={{
             margin:0, color:"#1a1816",
-            fontSize:"clamp(11px,1.05vw,15px)", fontWeight:700,
-            letterSpacing:"0.50em", textTransform:"uppercase",
+            fontSize:"clamp(14px,1.5vw,20px)", fontWeight:800,
+            letterSpacing:"0.25em", textTransform:"uppercase",
             fontFamily:"var(--font-mono)",
             textShadow:"0 1px 0 rgba(255,255,255,0.6), 0 -1px 0 rgba(0,0,0,0.2)",
           }}>
@@ -142,7 +142,7 @@ export function StudioInputUpload() {
             {/* ─── RING ASSEMBLY ─── */}
             <div style={{
               position:"relative",
-              width:"clamp(260px,36vw,470px)",
+              width:"clamp(360px,50vw,620px)",
               aspectRatio:"1",
               flexShrink:0,
               borderRadius:"50%",
@@ -162,8 +162,8 @@ export function StudioInputUpload() {
               {/* ── Lime-green glow ring — the #1 visual ── */}
               <div style={{
                 position:"absolute",
-                width:"76%", height:"76%",
-                left:"12%", top:"12%",
+                width:"82%", height:"82%",
+                left:"9%", top:"9%",
                 borderRadius:"50%",
                 border:`7px solid ${GREEN}`,
                 boxShadow:[
@@ -203,8 +203,8 @@ export function StudioInputUpload() {
                 aria-label={state==="idle"?"Click or drop XML":state==="processing"?`${progress}%`:"Complete"}
                 style={{
                   position:"absolute",
-                  width:"62%", height:"62%",
-                  left:"19%", top:"19%",
+                  width:"72%", height:"72%",
+                  left:"14%", top:"14%",
                   borderRadius:"50%",
                   background:"radial-gradient(circle at 45% 38%, #1c1c1a 0%, #0e0e0c 50%, #020200 100%)",
                   border:`2px solid ${GREEN}66`,
