@@ -1,7 +1,32 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { JogWheel } from "./jog-wheel";
+
+// ---------------------------------------------------------------------------
+// Video thumbnails — same IDs used in youtube-strip, reused here as mosaic bg
+// ---------------------------------------------------------------------------
+const MOSAIC_IDS = [
+  "rrdQIQXQF8I",
+  "sn0pgbuKfUY",
+  "PRdcytOMvn4",
+  "PZe5PqUDjBU",
+  "2rYGCA7bdFU",
+  "hdNoYygg2aI",
+  "K_66Gnv7wKY",
+  "UwHkETjnSq0",
+];
+
+// 5 columns × 3 rows = 15 cells; repeat the 8 videos to fill
+const GRID_IDS = [...MOSAIC_IDS, ...MOSAIC_IDS.slice(0, 7)]; // 15 total
+
+// Per-cell rotation offsets (degrees) for the scattered-mosaic feel
+const ROTATIONS = [
+  1.2, -0.8, 1.6, -1.3, 0.5,
+  -1.7, 0.9, 1.4, -0.6, 1.1,
+  0.7, -1.5, 1.0, -0.9, 1.8,
+];
 
 export function HeroSection() {
   return (
@@ -9,20 +34,95 @@ export function HeroSection() {
       style={{ background: "#0a0a0a" }}
       className="relative overflow-hidden px-6 pt-16 pb-20 md:pt-20 md:pb-28"
     >
-      {/* Subtle ambient glow behind the jog wheel */}
+      {/* ── Mosaic background: video thumbnails scattered across full area ── */}
       <div
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-0 overflow-hidden"
         aria-hidden="true"
       >
+        {/* Thumbnail grid — oversized and very slightly tilted */}
         <div
           style={{
             position: "absolute",
-            right: "10%",
-            top: "20%",
-            width: 500,
-            height: 500,
-            borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(132,204,22,0.06) 0%, transparent 70%)",
+            inset: "-10%",
+            display: "grid",
+            gridTemplateColumns: "repeat(5, 1fr)",
+            gridTemplateRows: "repeat(3, 1fr)",
+            gap: "10px",
+            transform: "rotate(-1.5deg) scale(1.04)",
+          }}
+        >
+          {GRID_IDS.map((id, i) => (
+            <div
+              key={`mosaic-${id}-${i}`}
+              style={{
+                position: "relative",
+                borderRadius: 6,
+                overflow: "hidden",
+                transform: `rotate(${ROTATIONS[i]}deg)`,
+                opacity: 0.38,
+              }}
+            >
+              <Image
+                src={`https://img.youtube.com/vi/${id}/mqdefault.jpg`}
+                alt=""
+                fill
+                sizes="22vw"
+                className="object-cover"
+                unoptimized
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Edge fade — top */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: "45%",
+            background:
+              "linear-gradient(to bottom, #0a0a0a 0%, rgba(10,10,10,0.7) 50%, transparent 100%)",
+          }}
+        />
+
+        {/* Edge fade — bottom */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: "45%",
+            background:
+              "linear-gradient(to top, #0a0a0a 0%, rgba(10,10,10,0.7) 50%, transparent 100%)",
+          }}
+        />
+
+        {/* Edge fade — left (stronger: hero text lives here) */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            bottom: 0,
+            width: "42%",
+            background:
+              "linear-gradient(to right, #0a0a0a 0%, rgba(10,10,10,0.85) 50%, transparent 100%)",
+          }}
+        />
+
+        {/* Edge fade — right */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            bottom: 0,
+            width: "30%",
+            background:
+              "linear-gradient(to left, #0a0a0a 0%, transparent 100%)",
           }}
         />
       </div>
@@ -69,7 +169,6 @@ export function HeroSection() {
                   padding: "14px 40px",
                   borderRadius: 4,
                   letterSpacing: "0.12em",
-                  // Matte 3-D depth: darker lime bottom edge + subtle shadow
                   boxShadow: "0 4px 0 #3f6212, 0 8px 24px rgba(132, 204, 22, 0.18)",
                   transition: "transform 80ms ease, box-shadow 80ms ease",
                 }}
