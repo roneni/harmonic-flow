@@ -1,4 +1,3 @@
-import { YouTubeStrip } from "@/components/landing/youtube-strip";
 import { HeroSection } from "@/components/landing/hero-section";
 import { IntegrationBar } from "@/components/landing/integration-bar";
 import { ProblemSection } from "@/components/landing/problem-section";
@@ -10,7 +9,6 @@ import { CtaSection } from "@/components/landing/cta-section";
 export default function HomePage() {
   return (
     <>
-      <YouTubeStrip />
       <HeroSection />
       <IntegrationBar />
       <ProblemSection />
