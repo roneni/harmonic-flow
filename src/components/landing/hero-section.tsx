@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { JogWheel } from "./jog-wheel";
+import { ThumbnailMosaic } from "./thumbnail-mosaic";
 
 export function HeroSection() {
   return (
@@ -9,23 +10,8 @@ export function HeroSection() {
       style={{ background: "#0a0a0a" }}
       className="relative overflow-hidden px-6 pt-16 pb-20 md:pt-20 md:pb-28"
     >
-      {/* Subtle ambient glow behind the jog wheel */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        aria-hidden="true"
-      >
-        <div
-          style={{
-            position: "absolute",
-            right: "10%",
-            top: "20%",
-            width: 500,
-            height: 500,
-            borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(132,204,22,0.06) 0%, transparent 70%)",
-          }}
-        />
-      </div>
+      {/* YouTube thumbnail mosaic background */}
+      <ThumbnailMosaic />
 
       <div className="relative mx-auto max-w-7xl">
         <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
