@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "stitch": {
+      "command": "npx",
+      "args": ["stitch-mcp", "start"],
+      "env": {
+        "GOOGLE_CLOUD_PROJECT": "harmonic-flow-app",
+        "PATH": "/usr/local/bin:/usr/local/sbin:/usr/local/google-cloud-sdk/google-cloud-sdk/bin:/usr/bin:/usr/sbin:/bin"
+      }
+    }
+  }
+}
