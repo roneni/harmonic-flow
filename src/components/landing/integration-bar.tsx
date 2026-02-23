@@ -17,10 +17,12 @@ function ScrewHead() {
 }
 
 const LOGO_STYLE: React.CSSProperties = {
-  height: 32,
+  height: 28, // refined smaller optical height 
   width: "auto",
   display: "block",
   filter: "brightness(0) invert(1)",
+  opacity: 0.85,
+  transition: "opacity 200ms ease",
 };
 
 // ── Integration bar ───────────────────────────────────────────────────────────
@@ -28,55 +30,39 @@ export function IntegrationBar() {
   return (
     <div
       style={{
-        background: "#111111",
-        borderTop: "1px solid #222222",
-        borderBottom: "1px solid #222222",
+        background: "#0a0a0a", // Match hero section background for seamless flow
+        borderBottom: "1px solid #1a1a1a",
       }}
+      className="py-12 md:py-16"
     >
-      <div
-        className="relative mx-auto flex items-center"
-        style={{ maxWidth: 1280, height: 96, paddingLeft: 32, paddingRight: 32 }}
-      >
-        {/* Corner screw heads */}
-        <span className="absolute top-3.5 left-5">  <ScrewHead /></span>
-        <span className="absolute bottom-3.5 left-5"><ScrewHead /></span>
-        <span className="absolute top-3.5 right-5">  <ScrewHead /></span>
-        <span className="absolute bottom-3.5 right-5"><ScrewHead /></span>
-
+      <div className="mx-auto flex max-w-5xl flex-col items-center justify-center gap-8 px-6">
         {/* Panel label */}
-        <span
-          className="hidden lg:block shrink-0 text-xs font-bold tracking-widest uppercase"
-          style={{ color: "#333333", letterSpacing: "0.2em", minWidth: 148 }}
-        >
-          Pro Integration
-        </span>
+        <p className="text-xs font-semibold tracking-[0.25em] text-[#666666] uppercase">
+          Compatible With
+        </p>
 
-        {/* Separator rule */}
-        <span
-          className="hidden lg:block shrink-0 mx-8"
-          style={{ width: 1, height: 36, background: "#222222" }}
-          aria-hidden="true"
-        />
-
-        {/* Three brand logos — evenly spaced, identical height + filter */}
-        <div className="flex items-center justify-center flex-1 gap-16 md:gap-20 lg:gap-24">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
+        {/* Three brand logos — exactly equal spacing, identical height */}
+        <div className="flex flex-wrap items-center justify-center gap-12 md:gap-20 lg:gap-24">
           <img
             src="/logos/rekordbox.svg"
             alt="Rekordbox"
             style={LOGO_STYLE}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.85")}
           />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/logos/serato.svg"
             alt="Serato"
             style={LOGO_STYLE}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.85")}
           />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/logos/traktor.svg"
             alt="Traktor"
             style={LOGO_STYLE}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.85")}
           />
         </div>
       </div>
