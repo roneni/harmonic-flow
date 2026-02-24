@@ -13,51 +13,54 @@ interface KeyPos {
 }
 
 const KEYS: KeyPos[] = [
-  { major: "C",   minor: "Am" },
-  { major: "G",   minor: "Em" },
-  { major: "D",   minor: "Bm" },
-  { major: "A",   minor: "F#m",  minorAlt: "Gbm" },
-  { major: "E",   minor: "C#m",  minorAlt: "Dbm" },
-  { major: "B",   majorAlt: "Cb",  minor: "G#m",  minorAlt: "Abm" },
-  { major: "F#",  majorAlt: "Gb",  minor: "Ebm",  minorAlt: "D#m" },
-  { major: "Db",  majorAlt: "C#",  minor: "Bbm" },
-  { major: "Ab",  majorAlt: "G#",  minor: "Fm" },
-  { major: "Eb",  majorAlt: "D#",  minor: "Cm" },
-  { major: "Bb",  majorAlt: "A#",  minor: "Gm" },
-  { major: "F",   minor: "Dm" },
+  { major: "C", minor: "Am" },
+  { major: "G", minor: "Em" },
+  { major: "D", minor: "Bm" },
+  { major: "A", minor: "F#m", minorAlt: "Gbm" },
+  { major: "E", minor: "C#m", minorAlt: "Dbm" },
+  { major: "B", majorAlt: "Cb", minor: "G#m", minorAlt: "Abm" },
+  { major: "F#", majorAlt: "Gb", minor: "Ebm", minorAlt: "D#m" },
+  { major: "Db", majorAlt: "C#", minor: "Bbm" },
+  { major: "Ab", majorAlt: "G#", minor: "Fm" },
+  { major: "Eb", majorAlt: "D#", minor: "Cm" },
+  { major: "Bb", majorAlt: "A#", minor: "Gm" },
+  { major: "F", minor: "Dm" },
 ];
 
 // ── Dimensions (viewBox: -210 to 210) ────────────────────────────────────────
-const SIZE       = 420;
-const VB         = 210;
+const SIZE = 420;
+const VB = 210;
 
 const RING_OUTER = 207; // metallic knurled ring outer edge
 const RING_INNER = 177; // metallic ring inner edge
-const LIME_R     = 175; // lime green accent ring
-const KEY_OUTER  = 173; // key segment zone outer
-const KEY_INNER  = 108; // key segment zone inner
-const MAJOR_R    = 163; // major key text radius
-const MAJOR_ALT_R= 152; // enharmonic major text radius
-const DIV_R      = 142; // separator ring radius
-const MINOR_R    = 131; // minor key text radius
-const MINOR_ALT_R= 119; // enharmonic minor text radius
-const PLATTER_R  = 105; // dark vinyl platter
-const HUB_R      =  46; // centre hub
-const HUB2_R     =  28; // inner hub ring
-const SPINDLE_R  =   8; // centre spindle dot
+const LIME_R = 175; // lime green accent ring
+const KEY_OUTER = 173; // key segment zone outer
+const KEY_INNER = 108; // key segment zone inner
+const MAJOR_R = 163; // major key text radius
+const MAJOR_ALT_R = 152; // enharmonic major text radius
+const DIV_R = 142; // separator ring radius
+const MINOR_R = 131; // minor key text radius
+const MINOR_ALT_R = 119; // enharmonic minor text radius
+const PLATTER_R = 105; // dark vinyl platter
+const HUB_R = 46; // centre hub
+const HUB2_R = 28; // inner hub ring
+const SPINDLE_R = 8; // centre spindle dot
 
-const GAP_DEG    = 0.8; // visual gap between segments
+const GAP_DEG = 0.8; // visual gap between segments
 
 // ── Physics constants ─────────────────────────────────────────────────────────
 const AUTO_DEG_PER_MS = 360 / 8000; // 1 full rotation per 8 s
-const DECAY           = 0.95;
-const VEL_THRESHOLD   = 0.05;
+const DECAY = 0.95;
+const VEL_THRESHOLD = 0.05;
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 /** Convert clockwise-from-top angle to SVG [x, y] at radius r */
 function pt(angleDeg: number, r: number): [number, number] {
   const rad = (angleDeg * Math.PI) / 180;
-  return [Math.sin(rad) * r, -Math.cos(rad) * r];
+  return [
+    Number((Math.sin(rad) * r).toFixed(4)),
+    Number((-Math.cos(rad) * r).toFixed(4))
+  ];
 }
 
 /** SVG path for an annular sector (ring slice) */
@@ -84,11 +87,11 @@ function getCompatible(i: number | null): Set<number> {
 
 // ── Component ─────────────────────────────────────────────────────────────────
 export function JogWheel() {
-  const wrapperRef    = useRef<HTMLDivElement>(null);
-  const rotation      = useMotionValue(0);
-  const isDragging    = useRef(false);
-  const lastAngle     = useRef(0);
-  const velocity      = useRef(0);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const rotation = useMotionValue(0);
+  const isDragging = useRef(false);
+  const lastAngle = useRef(0);
+  const velocity = useRef(0);
   const lastTimestamp = useRef(0);
 
   const [hovered, setHovered] = useState<number | null>(null);
@@ -203,21 +206,21 @@ export function JogWheel() {
               <defs>
                 {/* Platter surface — dark off-centre radial gradient for vinyl depth */}
                 <radialGradient id="jw-platter" cx="42%" cy="38%" r="62%">
-                  <stop offset="0%"   stopColor="#252525" />
-                  <stop offset="55%"  stopColor="#161616" />
+                  <stop offset="0%" stopColor="#252525" />
+                  <stop offset="55%" stopColor="#161616" />
                   <stop offset="100%" stopColor="#0c0c0c" />
                 </radialGradient>
 
                 {/* Metallic outer ring */}
                 <radialGradient id="jw-ring" cx="50%" cy="0%" r="120%">
-                  <stop offset="0%"   stopColor="#383838" />
-                  <stop offset="40%"  stopColor="#1c1c1c" />
+                  <stop offset="0%" stopColor="#383838" />
+                  <stop offset="40%" stopColor="#1c1c1c" />
                   <stop offset="100%" stopColor="#111111" />
                 </radialGradient>
 
                 {/* Hub */}
                 <radialGradient id="jw-hub" cx="35%" cy="30%" r="70%">
-                  <stop offset="0%"   stopColor="#383838" />
+                  <stop offset="0%" stopColor="#383838" />
                   <stop offset="100%" stopColor="#080808" />
                 </radialGradient>
 
@@ -264,15 +267,15 @@ export function JogWheel() {
               <circle r={RING_INNER} fill="none" stroke="#1e1e1e" strokeWidth="1.2" />
 
               {/* ── Lime green accent band ──────────────────────────────────── */}
-              <circle r={LIME_R}     fill="none" stroke="#84cc16" strokeWidth="2.5" opacity="0.9" />
+              <circle r={LIME_R} fill="none" stroke="#84cc16" strokeWidth="2.5" opacity="0.9" />
               <circle r={LIME_R - 3} fill="none" stroke="#84cc16" strokeWidth="0.6" opacity="0.3" />
 
               {/* ── 12 interactive key segments ────────────────────────────── */}
               {KEYS.map((key, i) => {
                 const center = i * 30 + 15; // midpoint angle of segment
-                const [mjX, mjY]   = pt(center, MAJOR_R);
-                const [maX, maY]   = pt(center, MAJOR_ALT_R);
-                const [mnX, mnY]   = pt(center, MINOR_R);
+                const [mjX, mjY] = pt(center, MAJOR_R);
+                const [maX, maY] = pt(center, MAJOR_ALT_R);
+                const [mnX, mnY] = pt(center, MINOR_R);
                 const [mnAX, mnAY] = pt(center, MINOR_ALT_R);
                 // Radial divider at segment start
                 const [divI_x, divI_y] = pt(i * 30, KEY_INNER);
@@ -386,8 +389,8 @@ export function JogWheel() {
               <circle r={PLATTER_R - 2} fill="none" stroke="#2a2a2a" strokeWidth="1.5" />
 
               {/* ── Centre hub ─────────────────────────────────────────────── */}
-              <circle r={HUB_R}  fill="url(#jw-hub)" stroke="#282828" strokeWidth="1" />
-              <circle r={HUB2_R} fill="#0a0a0a"      stroke="#2e2e2e" strokeWidth="0.8" />
+              <circle r={HUB_R} fill="url(#jw-hub)" stroke="#282828" strokeWidth="1" />
+              <circle r={HUB2_R} fill="#0a0a0a" stroke="#2e2e2e" strokeWidth="0.8" />
 
               {/* Lime green spindle */}
               <circle r={SPINDLE_R} fill="#84cc16" />
