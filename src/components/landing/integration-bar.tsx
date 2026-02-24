@@ -1,3 +1,5 @@
+"use client";
+
 // ── Integration bar — self-hosted SVG logos via <img> + CSS filter ────────────
 // /public/logos/rekordbox.svg — path data from official Pioneer DJ CDN
 // /public/logos/traktor.svg   — path data from official NI CDN
