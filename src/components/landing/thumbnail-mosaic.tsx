@@ -7,6 +7,16 @@ import Image from "next/image";
 // Using mqdefault (320×180) which is reliably available for all videos
 // ---------------------------------------------------------------------------
 const VIDEO_IDS = [
+    // Outer edges (less visible)
+    "JfLMADyiYVE",
+    "0az2NYzGGbw",
+    "wHagWQ6XT0U",
+    "_sBMbvooqI0",
+    "WQtqZOBfNd0",
+    "jqQwdApbg2c",
+    "OltmDX-g3Fs",
+    "kM7IP1sjwkY",
+    // Center cluster (highly visible, vibrant)
     "rrdQIQXQF8I",
     "sn0pgbuKfUY",
     "PRdcytOMvn4",
@@ -16,16 +26,9 @@ const VIDEO_IDS = [
     "K_66Gnv7wKY",
     "UwHkETjnSq0",
     "c2ExXW1SpGM",
-    "JfLMADyiYVE",
-    "0az2NYzGGbw",
-    "WQtqZOBfNd0",
-    "jqQwdApbg2c",
+    // Outer edges (less visible)
     "ufJoZwwjbtI",
     "wqzvRgXVunc",
-    "wHagWQ6XT0U",
-    "_sBMbvooqI0",
-    "OltmDX-g3Fs",
-    "kM7IP1sjwkY",
     "mSG6HjGu528",
     "CeTlphXFTmA",
     "NL2QaSmia1c",
@@ -34,11 +37,11 @@ const VIDEO_IDS = [
 ];
 
 // ---------------------------------------------------------------------------
-// We tile the mosaic by repeating the IDs to fill a 6-column × 4-row grid.
-// Each thumbnail keeps its 16:9 aspect ratio.
+// We tile the mosaic by repeating the IDs to fill an 8-column × 3-row layout
+// with square cells to mimic album covers.
 // ---------------------------------------------------------------------------
-const COLS = 6;
-const ROWS = 4;
+const COLS = 8;
+const ROWS = 3;
 const TOTAL = COLS * ROWS; // 24 tiles
 
 const tiles = Array.from({ length: TOTAL }, (_, i) => VIDEO_IDS[i % VIDEO_IDS.length]);
@@ -65,12 +68,16 @@ export function ThumbnailMosaic() {
                 }}
             >
                 {tiles.map((id, i) => (
-                    <div key={i} className="relative overflow-hidden">
+                    <div
+                        key={i}
+                        className="relative overflow-hidden"
+                        style={{ aspectRatio: "1 / 1" }}
+                    >
                         <Image
-                            src={`https://img.youtube.com/vi/${id}/mqdefault.jpg`}
+                            src={`https://img.youtube.com/vi/${id}/maxresdefault.jpg`}
                             alt=""
                             fill
-                            sizes="(max-width: 768px) 50vw, 17vw"
+                            sizes="(max-width: 768px) 50vw, 12vw"
                             className="object-cover"
                             style={{
                                 // Boost saturation and slightly dim raw brightness for a rich, premium look
