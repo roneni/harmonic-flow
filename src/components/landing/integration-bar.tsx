@@ -18,8 +18,7 @@ function ScrewHead() {
   );
 }
 
-const LOGO_STYLE: React.CSSProperties = {
-  height: 28, // refined smaller optical height 
+const LOGO_BASE_STYLE: React.CSSProperties = {
   width: "auto",
   display: "block",
   filter: "brightness(0) invert(1)",
@@ -43,26 +42,26 @@ export function IntegrationBar() {
           Compatible With
         </p>
 
-        {/* Three brand logos — exactly equal spacing, identical height */}
+        {/* Three brand logos — perfectly matched to visual optical height & baseline */}
         <div className="flex flex-wrap items-center justify-center gap-12 md:gap-20 lg:gap-24">
           <img
             src="/logos/rekordbox.svg"
             alt="Rekordbox"
-            style={LOGO_STYLE}
+            style={{ ...LOGO_BASE_STYLE, height: 23, transform: "translateY(1px)" }}
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.85")}
           />
           <img
             src="/logos/serato.svg"
             alt="Serato"
-            style={LOGO_STYLE}
+            style={{ ...LOGO_BASE_STYLE, height: 20 }}
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.85")}
           />
           <img
             src="/logos/traktor.svg"
             alt="Traktor"
-            style={LOGO_STYLE}
+            style={{ ...LOGO_BASE_STYLE, height: 39, transform: "translateY(-1.5px)" }}
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.85")}
           />
