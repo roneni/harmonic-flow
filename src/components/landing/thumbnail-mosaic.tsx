@@ -49,7 +49,7 @@ export function ThumbnailMosaic() {
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 overflow-hidden"
         >
-            {/* ── Thumbnail grid ─────────────────────────────────────────────── */}
+            {/* ── Thumbnail grid (Fully opaque, but masked radially) ─────────────── */}
             <div
                 style={{
                     display: "grid",
@@ -58,7 +58,10 @@ export function ThumbnailMosaic() {
                     width: "100%",
                     height: "100%",
                     gap: 3,
-                    opacity: 0.45,
+                    // Use CSS masking to create a perfect, smooth vignette falloff just like Algoriddim
+                    // The center is 100% visible (black), softly fading to 0% visible (transparent) at the edges
+                    WebkitMaskImage: "radial-gradient(ellipse 70% 80% at 50% 50%, black 25%, transparent 85%)",
+                    maskImage: "radial-gradient(ellipse 70% 80% at 50% 50%, black 25%, transparent 85%)",
                 }}
             >
                 {tiles.map((id, i) => (
@@ -69,28 +72,23 @@ export function ThumbnailMosaic() {
                             fill
                             sizes="(max-width: 768px) 50vw, 17vw"
                             className="object-cover"
+                            style={{
+                                // Boost saturation and slightly dim raw brightness for a rich, premium look
+                                filter: "saturate(1.3) brightness(0.85)",
+                            }}
                             unoptimized
                         />
                     </div>
                 ))}
             </div>
 
-            {/* ── Radial vignette — fades all four edges to dark background ─── */}
+            {/* ── Additional Center-Darkening Overlay for Text Legibility ──────── */}
             <div
                 style={{
                     position: "absolute",
                     inset: 0,
-                    background:
-                        "radial-gradient(ellipse 80% 80% at 50% 50%, transparent 10%, #0a0a0a 72%)",
-                }}
-            />
-
-            {/* ── Solid dark overlay for text legibility ───────────────────── */}
-            <div
-                style={{
-                    position: "absolute",
-                    inset: 0,
-                    background: "rgba(10, 10, 10, 0.55)",
+                    // A gradient that strictly darkens the center where text sits, leaving the mid-ring vibrant
+                    background: "radial-gradient(ellipse 80% 80% at 50% 50%, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.3) 40%, transparent 100%)",
                 }}
             />
         </div>
