@@ -26,7 +26,6 @@ export function HeroSection() {
                 fontSize: "clamp(56px, 8vw, 96px)",
                 lineHeight: 0.93,
                 letterSpacing: "-0.02em",
-                textShadow: "0 10px 40px rgba(0,0,0,0.8), 0 2px 4px rgba(0,0,0,0.6)",
               }}
             >
               HARMONIC
@@ -37,10 +36,7 @@ export function HeroSection() {
             {/* Subtitle */}
             <p
               className="mt-6 max-w-md text-base md:text-lg leading-relaxed"
-              style={{
-                color: "#a0a0a0",
-                textShadow: "0 2px 10px rgba(0,0,0,0.8)",
-              }}
+              style={{ color: "#888888" }}
             >
               Optimize Your DJ Sets with Professional Harmonic Mixing for
               Rekordbox, Serato, and Traktor.
@@ -49,34 +45,31 @@ export function HeroSection() {
             {/* CTA group */}
             <div className="mt-10 flex flex-col items-center md:items-start gap-4">
 
-              {/* Primary CTA — lime green, 3D matte finish */}
+              {/* Primary CTA — lime green outline, transparent background */}
               <Link
                 href="/optimize"
                 className="group relative inline-block text-sm font-bold tracking-widest uppercase select-none"
                 style={{
-                  color: "#0a0a0a",
-                  background: "#84cc16",
-                  padding: "14px 40px",
+                  color: "#ffffff",
+                  background: "transparent",
+                  border: "2px solid #84cc16",
+                  padding: "12px 38px", // adjusted slightly to account for the 2px border
                   borderRadius: 4,
                   letterSpacing: "0.12em",
-                  // Matte 3-D depth: darker lime bottom edge + subtle shadow
-                  boxShadow: "0 4px 0 #3f6212, 0 8px 24px rgba(132, 204, 22, 0.18)",
-                  transition: "transform 80ms ease, box-shadow 80ms ease",
+                  transition: "all 150ms ease",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.background = "rgba(132, 204, 22, 0.1)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.background = "transparent";
+                  (e.currentTarget as HTMLElement).style.transform = "";
                 }}
                 onMouseDown={(e) => {
-                  (e.currentTarget as HTMLElement).style.transform = "translateY(3px)";
-                  (e.currentTarget as HTMLElement).style.boxShadow =
-                    "0 1px 0 #3f6212, 0 4px 12px rgba(132, 204, 22, 0.12)";
+                  (e.currentTarget as HTMLElement).style.transform = "scale(0.98)";
                 }}
                 onMouseUp={(e) => {
                   (e.currentTarget as HTMLElement).style.transform = "";
-                  (e.currentTarget as HTMLElement).style.boxShadow =
-                    "0 4px 0 #3f6212, 0 8px 24px rgba(132, 204, 22, 0.18)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.transform = "";
-                  (e.currentTarget as HTMLElement).style.boxShadow =
-                    "0 4px 0 #3f6212, 0 8px 24px rgba(132, 204, 22, 0.18)";
                 }}
               >
                 TRY IT FREE
@@ -86,7 +79,7 @@ export function HeroSection() {
               <Link
                 href="/#how-it-works"
                 className="text-sm transition-colors"
-                style={{ color: "#888888", textShadow: "0 2px 4px rgba(0,0,0,0.6)" }}
+                style={{ color: "#888888" }}
                 onMouseEnter={(e) => {
                   (e.currentTarget as HTMLElement).style.color = "#ffffff";
                 }}
@@ -97,14 +90,6 @@ export function HeroSection() {
                 See how it works →
               </Link>
             </div>
-
-            {/* Trust line */}
-            <p
-              className="mt-8 text-xs"
-              style={{ color: "#555555" }}
-            >
-              No account required &nbsp;·&nbsp; Works with Rekordbox, Traktor &amp; Serato
-            </p>
           </div>
 
           {/* ── Right: Jog wheel (desktop only) ─────────────────────────── */}
