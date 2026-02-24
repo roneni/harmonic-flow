@@ -42,26 +42,27 @@ export function IntegrationBar() {
           Compatible With
         </p>
 
-        {/* Three brand logos — perfectly matched to visual optical height & baseline */}
+        {/* Three brand logos — optically balanced based on their exact SVG viewBox bounds. 
+            Traktor (caps) naturally needs a smaller container than Serato/Rekordbox (lowercase with descenders). */}
         <div className="flex flex-wrap items-center justify-center gap-12 md:gap-20 lg:gap-24">
           <img
             src="/logos/rekordbox.svg"
             alt="Rekordbox"
-            style={{ ...LOGO_BASE_STYLE, height: 23, transform: "translateY(1px)" }}
+            style={{ ...LOGO_BASE_STYLE, height: 28 }}
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.85")}
           />
           <img
             src="/logos/serato.svg"
             alt="Serato"
-            style={{ ...LOGO_BASE_STYLE, height: 20 }}
+            style={{ ...LOGO_BASE_STYLE, height: 26 }}
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.85")}
           />
           <img
             src="/logos/traktor.svg"
             alt="Traktor"
-            style={{ ...LOGO_BASE_STYLE, height: 39, transform: "translateY(-1.5px)" }}
+            style={{ ...LOGO_BASE_STYLE, height: 25, transform: "translateY(2px)" }}
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.85")}
           />
