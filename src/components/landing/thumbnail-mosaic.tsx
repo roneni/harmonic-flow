@@ -43,7 +43,7 @@ export function ThumbnailMosaic() {
                     width: "100%",
                     height: "100%",
                     gap: 3,
-                    opacity: 0.25,
+                    opacity: 0.45,
                 }}
             >
                 {tiles.map((id, i) => (
