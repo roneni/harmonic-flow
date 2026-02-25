@@ -1,4 +1,4 @@
-import { HeroSection } from "@/components/landing/hero-section";
+import { HeroSectionPencilTest } from "@/components/landing/hero-section-pencil-test";
 import { IntegrationBar } from "@/components/landing/integration-bar";
 import { ProblemSection } from "@/components/landing/problem-section";
 import { HowItWorks } from "@/components/landing/how-it-works";
@@ -9,7 +9,7 @@ import { CtaSection } from "@/components/landing/cta-section";
 export default function HomePage() {
   return (
     <>
-      <HeroSection />
+      <HeroSectionPencilTest />
       <IntegrationBar />
       <ProblemSection />
       <HowItWorks />
