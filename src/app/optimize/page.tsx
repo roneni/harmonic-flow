@@ -6,6 +6,7 @@ import { FileUpload } from "@/components/optimizer/file-upload";
 import { TrackTable } from "@/components/optimizer/track-table";
 import { EnergyModeSelector } from "@/components/optimizer/energy-mode-selector";
 import { OptimizationResults } from "@/components/optimizer/optimization-results";
+import { ProcessingOverlay } from "@/components/optimizer/processing-overlay";
 
 export default function OptimizePage() {
   const {
@@ -61,8 +62,11 @@ export default function OptimizePage() {
         </div>
       )}
 
+      {/* Step: Optimizing — show processing animation */}
+      {step === "optimizing" && <ProcessingOverlay />}
+
       {/* Step: Parsed — show tracks + energy mode + optimize button */}
-      {(step === "parsed" || step === "optimizing") && (
+      {step === "parsed" && (
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <div>
@@ -96,17 +100,9 @@ export default function OptimizePage() {
           <div className="flex justify-center">
             <button
               onClick={optimize}
-              disabled={step === "optimizing"}
-              className="inline-flex items-center gap-2 rounded-lg bg-primary px-8 py-3 text-lg font-semibold text-white transition-colors hover:bg-primary/80 disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-lg bg-primary px-8 py-3 text-lg font-semibold text-white transition-colors hover:bg-primary/80"
             >
-              {step === "optimizing" ? (
-                <>
-                  <span className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                  Optimizing...
-                </>
-              ) : (
-                "Optimize Playlist"
-              )}
+              Optimize Playlist
             </button>
           </div>
         </div>

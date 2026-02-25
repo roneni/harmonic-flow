@@ -80,10 +80,16 @@ export function useOptimizer() {
 
     setState((s) => ({ ...s, step: "optimizing" }));
 
-    // Run optimization in a microtask so the UI shows the loading state
-    setTimeout(() => {
+    // Run optimization with a minimum delay so the processing animation can play
+    const MIN_ANIMATION_MS = 26000; // 16 phases × 1500ms + 1s completion pause + buffer
+    const start = Date.now();
+
+    setTimeout(async () => {
       try {
         const result = optimizePlaylist(state.tracks, state.energyMode);
+        const elapsed = Date.now() - start;
+        const remaining = Math.max(0, MIN_ANIMATION_MS - elapsed);
+        await new Promise((r) => setTimeout(r, remaining));
         setState((s) => ({ ...s, step: "results", result }));
       } catch {
         setState((s) => ({
