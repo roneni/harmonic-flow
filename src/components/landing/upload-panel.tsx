@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useState, useEffect, useRef } from "react";
+import Link from "next/link";
 
 /* ─── Processing engine phases (matching real algorithm steps) ──── */
 const ENGINE_PHASES = [
@@ -100,7 +101,10 @@ function VUMeter({ animated = false }: { animated?: boolean }) {
                         backgroundColor: color,
                         opacity: i < 13 ? 0.9 : 0.25,
                         ...(animated && i < 13 ? {
-                            animation: `vu-bounce 0.8s ease-in-out infinite`,
+                            animationName: "vu-bounce",
+                            animationDuration: "0.8s",
+                            animationTimingFunction: "ease-in-out",
+                            animationIterationCount: "infinite",
                             animationDelay: `${i * 0.05}s`,
                         } : {}),
                     }}
@@ -135,11 +139,10 @@ function PipelineSteps({ activeStep = 0 }: { activeStep?: number }) {
                     <div key={step.label} className="flex items-center gap-3">
                         <div className="flex items-center gap-2">
                             <div
-                                className={`w-[22px] h-[22px] rounded-full flex items-center justify-center text-[9px] font-bold border transition-all duration-500 ${
-                                    isActive
-                                        ? "border-[#84CC16] text-[#84CC16]"
-                                        : "border-[#555] text-[#999]"
-                                }`}
+                                className={`w-[22px] h-[22px] rounded-full flex items-center justify-center text-[9px] font-bold border transition-all duration-500 ${isActive
+                                    ? "border-[#84CC16] text-[#84CC16]"
+                                    : "border-[#555] text-[#999]"
+                                    }`}
                                 style={isCurrent ? {
                                     boxShadow: "0 0 8px rgba(132,204,22,0.3), inset 0 0 6px rgba(132,204,22,0.1)",
                                     animation: "step-glow 1.5s ease-in-out infinite",
@@ -156,9 +159,8 @@ function PipelineSteps({ activeStep = 0 }: { activeStep?: number }) {
                                 )}
                             </div>
                             <span
-                                className={`text-[11px] tracking-[2px] font-semibold transition-all duration-500 ${
-                                    isActive ? "text-[#84CC16]" : "text-[#999]"
-                                }`}
+                                className={`text-[11px] tracking-[2px] font-semibold transition-all duration-500 ${isActive ? "text-[#84CC16]" : "text-[#999]"
+                                    }`}
                                 style={isActive ? {
                                     textShadow: "0 0 10px rgba(132,204,22,0.3)",
                                 } : {}}
@@ -202,7 +204,7 @@ function ProcessingTerminal({
         <div className="flex flex-col items-center justify-center py-6 md:py-8 gap-5 w-full">
             {/* Spinning processor ring */}
             <div className="relative w-[56px] h-[56px]">
-                <svg viewBox="0 0 56 56" className="w-full h-full animate-spin" style={{ animationDuration: "3s" }}>
+                <svg viewBox="0 0 56 56" className="w-full h-full" style={{ animationName: "spin", animationDuration: "3s", animationTimingFunction: "linear", animationIterationCount: "infinite" }}>
                     <circle cx="28" cy="28" r="24" fill="none" stroke="#1A1A1A" strokeWidth="2" />
                     <circle
                         cx="28" cy="28" r="24" fill="none"
@@ -231,9 +233,9 @@ function ProcessingTerminal({
                     {phase.toUpperCase().replace("...", "")}
                 </p>
                 <div className="flex items-center justify-center gap-1 mt-1">
-                    <div className="w-1 h-1 rounded-full bg-[#84CC16] animate-pulse" />
-                    <div className="w-1 h-1 rounded-full bg-[#84CC16] animate-pulse" style={{ animationDelay: "0.2s" }} />
-                    <div className="w-1 h-1 rounded-full bg-[#84CC16] animate-pulse" style={{ animationDelay: "0.4s" }} />
+                    <div className="w-1 h-1 rounded-full bg-[#84CC16]" style={{ animationName: "pulse", animationDuration: "2s", animationTimingFunction: "cubic-bezier(0.4, 0, 0.6, 1)", animationIterationCount: "infinite" }} />
+                    <div className="w-1 h-1 rounded-full bg-[#84CC16]" style={{ animationName: "pulse", animationDuration: "2s", animationTimingFunction: "cubic-bezier(0.4, 0, 0.6, 1)", animationIterationCount: "infinite", animationDelay: "0.2s" }} />
+                    <div className="w-1 h-1 rounded-full bg-[#84CC16]" style={{ animationName: "pulse", animationDuration: "2s", animationTimingFunction: "cubic-bezier(0.4, 0, 0.6, 1)", animationIterationCount: "infinite", animationDelay: "0.4s" }} />
                 </div>
             </div>
 
@@ -305,12 +307,14 @@ function IdleDropZone({ isDragOver }: { isDragOver: boolean }) {
                 Drop .txt or .xml &nbsp;•&nbsp; Rekordbox, Serato, Traktor
             </p>
 
-            <button
-                className="mt-5 px-5 py-2 rounded border border-[#2A2A2A] text-[11px] tracking-[1.5px] font-semibold text-[#888] hover:border-[#84CC16] hover:text-[#84CC16] transition-all duration-200 bg-transparent"
-                style={{ backdropFilter: "blur(8px)" }}
-            >
-                BROWSE FILES
-            </button>
+            <Link href="/optimize">
+                <button
+                    className="mt-5 px-5 py-2 rounded border border-[#2A2A2A] text-[11px] tracking-[1.5px] font-semibold text-[#888] hover:border-[#84CC16] hover:text-[#84CC16] transition-all duration-200 bg-transparent"
+                    style={{ backdropFilter: "blur(8px)" }}
+                >
+                    BROWSE FILES
+                </button>
+            </Link>
         </>
     );
 }
@@ -415,15 +419,14 @@ export function UploadPanel() {
 
                 <div className="relative mx-auto max-w-[680px]">
                     <div
-                        className={`relative rounded-lg border transition-all duration-500 ${
-                            isProcessing
-                                ? "border-[#84CC1644]"
-                                : isComplete
+                        className={`relative rounded-lg border transition-all duration-500 ${isProcessing
+                            ? "border-[#84CC1644]"
+                            : isComplete
+                                ? "border-[#84CC16]"
+                                : isDragOver
                                     ? "border-[#84CC16]"
-                                    : isDragOver
-                                        ? "border-[#84CC16]"
-                                        : "border-[#1E1E1E]"
-                        }`}
+                                    : "border-[#1E1E1E]"
+                            }`}
                         style={{
                             background: "linear-gradient(180deg, rgba(20,20,20,0.9) 0%, rgba(12,12,12,0.95) 100%)",
                             boxShadow: isProcessing
@@ -458,15 +461,14 @@ export function UploadPanel() {
                         {/* Inner drop zone — content switches between states */}
                         <div className="mx-6 my-10 md:mx-10">
                             <div
-                                className={`relative flex flex-col items-center justify-center rounded border border-dashed transition-all duration-500 ${
-                                    isProcessing
-                                        ? "border-[#84CC1633] bg-[rgba(132,204,22,0.02)]"
-                                        : isComplete
-                                            ? "border-[#84CC1666] bg-[rgba(132,204,22,0.03)]"
-                                            : isDragOver
-                                                ? "border-[#84CC16] bg-[rgba(132,204,22,0.03)]"
-                                                : "border-[#2A2A2A] bg-transparent"
-                                }`}
+                                className={`relative flex flex-col items-center justify-center rounded border border-dashed transition-all duration-500 ${isProcessing
+                                    ? "border-[#84CC1633] bg-[rgba(132,204,22,0.02)]"
+                                    : isComplete
+                                        ? "border-[#84CC1666] bg-[rgba(132,204,22,0.03)]"
+                                        : isDragOver
+                                            ? "border-[#84CC16] bg-[rgba(132,204,22,0.03)]"
+                                            : "border-[#2A2A2A] bg-transparent"
+                                    }`}
                                 style={{ backdropFilter: "blur(8px)", minHeight: "200px" }}
                             >
                                 {state === "idle" && <IdleDropZone isDragOver={isDragOver} />}

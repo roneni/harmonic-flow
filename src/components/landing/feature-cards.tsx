@@ -1,7 +1,8 @@
 "use client";
 
-/* ─── Round to 2 decimal places for SSR/client hydration parity ── */
-const r2 = (v: number) => Math.round(v * 100) / 100;
+/* ─── Helper: round to 2 decimal places (prevents SSR/client hydration mismatch) */
+const r2 = (n: number) => Math.round(n * 100) / 100;
+const toRad = (deg: number) => (deg * Math.PI) / 180;
 
 /* ─── Circle of Fifths Key Data ────────────────────────────────── */
 const MAJOR_KEYS = [
@@ -12,6 +13,64 @@ const MINOR_KEYS = [
 ];
 const HIGHLIGHTED_KEYS = new Set(["Am", "Em", "Bm", "F#m"]);
 const HIGHLIGHTED_MAJOR = new Set(["C", "G", "D", "A"]);
+
+/* ─── Pre-compute all Circle of Fifths positions (avoids trig during render) ── */
+const COF_CX = 150;
+const COF_CY = 145;
+const COF_OUTER_R = 110;
+const COF_INNER_R = 75;
+
+function cofPos(index: number, radius: number) {
+    const angle = toRad(index * 30 - 90);
+    return { x: r2(COF_CX + radius * Math.cos(angle)), y: r2(COF_CY + radius * Math.sin(angle)) };
+}
+
+const MAJOR_LABEL_POSITIONS = MAJOR_KEYS.map((_, i) => cofPos(i, COF_OUTER_R + 18));
+const MINOR_LABEL_POSITIONS = MINOR_KEYS.map((_, i) => cofPos(i, COF_INNER_R - 18));
+const INNER_RING_POSITIONS = Array.from({ length: 12 }, (_, i) => cofPos(i, COF_INNER_R));
+
+/* Arc paths (pre-computed strings) */
+const ARC_START = toRad(0 * 30 - 90 - 15);
+const ARC_END = toRad(3 * 30 - 90 + 15);
+
+const INNER_ARC_PATH = `M ${r2(COF_CX + COF_INNER_R * Math.cos(ARC_START))} ${r2(COF_CY + COF_INNER_R * Math.sin(ARC_START))} A ${COF_INNER_R} ${COF_INNER_R} 0 0 1 ${r2(COF_CX + COF_INNER_R * Math.cos(ARC_END))} ${r2(COF_CY + COF_INNER_R * Math.sin(ARC_END))}`;
+const OUTER_ARC_PATH = `M ${r2(COF_CX + COF_OUTER_R * Math.cos(ARC_START))} ${r2(COF_CY + COF_OUTER_R * Math.sin(ARC_START))} A ${COF_OUTER_R} ${COF_OUTER_R} 0 0 1 ${r2(COF_CX + COF_OUTER_R * Math.cos(ARC_END))} ${r2(COF_CY + COF_OUTER_R * Math.sin(ARC_END))}`;
+
+const SECTOR_PATHS = [0, 1, 2, 3].map((i) => {
+    const a1 = toRad(i * 30 - 90 - 15);
+    const a2 = toRad(i * 30 - 90 + 15);
+    return [
+        `M ${r2(COF_CX + COF_INNER_R * Math.cos(a1))} ${r2(COF_CY + COF_INNER_R * Math.sin(a1))}`,
+        `A ${COF_INNER_R} ${COF_INNER_R} 0 0 1 ${r2(COF_CX + COF_INNER_R * Math.cos(a2))} ${r2(COF_CY + COF_INNER_R * Math.sin(a2))}`,
+        `L ${r2(COF_CX + COF_OUTER_R * Math.cos(a2))} ${r2(COF_CY + COF_OUTER_R * Math.sin(a2))}`,
+        `A ${COF_OUTER_R} ${COF_OUTER_R} 0 0 0 ${r2(COF_CX + COF_OUTER_R * Math.cos(a1))} ${r2(COF_CY + COF_OUTER_R * Math.sin(a1))}`,
+        "Z",
+    ].join(" ");
+});
+
+/* Pre-compute rotary knob SVG values */
+function computeKnob(value: number) {
+    const r = 22;
+    const cx = 28;
+    const cy = 28;
+    const startAngle = 135;
+    const endAngle = 135 + value * 270;
+    const startRad = toRad(startAngle);
+    const endRad = toRad(endAngle);
+    return {
+        startX: r2(cx + r * Math.cos(startRad)),
+        startY: r2(cy + r * Math.sin(startRad)),
+        endX: r2(cx + r * Math.cos(endRad)),
+        endY: r2(cy + r * Math.sin(endRad)),
+        largeArc: endAngle - startAngle > 180 ? 1 : 0,
+        r,
+        cx,
+        cy,
+    };
+}
+
+const KNOB_BPM = computeKnob(0.7);
+const KNOB_ENERGY = computeKnob(0.55);
 
 /* ─── Decorative hex bolt (pro-audio rack hardware) ─────────────── */
 function ScrewBolt({ className }: { className?: string }) {
@@ -82,33 +141,6 @@ function CardHeader({
    CARD 1: KEY DETECTION — Circle of Fifths
    ═══════════════════════════════════════════════════════════════════ */
 function KeyDetectionCard() {
-    const cx = 150;
-    const cy = 145;
-    const outerR = 110;
-    const innerR = 75;
-
-    function getPos(index: number, radius: number) {
-        const angle = (index * 30 - 90) * (Math.PI / 180);
-        return {
-            x: r2(cx + radius * Math.cos(angle)),
-            y: r2(cy + radius * Math.sin(angle)),
-        };
-    }
-
-    /* Build highlighted arc path for Am→Em→Bm→F#m (indices 0-3 in minor) */
-    const arcStartAngle = (0 * 30 - 90 - 15) * (Math.PI / 180);
-    const arcEndAngle = (3 * 30 - 90 + 15) * (Math.PI / 180);
-
-    const arcPath = [
-        `M ${r2(cx + innerR * Math.cos(arcStartAngle))} ${r2(cy + innerR * Math.sin(arcStartAngle))}`,
-        `A ${innerR} ${innerR} 0 0 1 ${r2(cx + innerR * Math.cos(arcEndAngle))} ${r2(cy + innerR * Math.sin(arcEndAngle))}`,
-    ].join(" ");
-
-    const outerArcPath = [
-        `M ${r2(cx + outerR * Math.cos(arcStartAngle))} ${r2(cy + outerR * Math.sin(arcStartAngle))}`,
-        `A ${outerR} ${outerR} 0 0 1 ${r2(cx + outerR * Math.cos(arcEndAngle))} ${r2(cy + outerR * Math.sin(arcEndAngle))}`,
-    ].join(" ");
-
     return (
         <div
             className="flex flex-col rounded-[10px] overflow-hidden relative"
@@ -137,66 +169,51 @@ function KeyDetectionCard() {
             <div className="flex-1 flex items-center justify-center px-4 py-3">
                 <svg viewBox="0 0 300 290" className="w-full max-w-[300px]">
                     {/* Outer circle ring */}
-                    <circle cx={cx} cy={cy} r={outerR} fill="none" stroke="#1A1A1A" strokeWidth="1" />
+                    <circle cx={COF_CX} cy={COF_CY} r={COF_OUTER_R} fill="none" stroke="#1A1A1A" strokeWidth="1" />
                     {/* Inner circle ring */}
-                    <circle cx={cx} cy={cy} r={innerR} fill="none" stroke="#1A1A1A" strokeWidth="1" />
+                    <circle cx={COF_CX} cy={COF_CY} r={COF_INNER_R} fill="none" stroke="#1A1A1A" strokeWidth="1" />
                     {/* Center glow */}
-                    <circle cx={cx} cy={cy} r="30" fill="url(#centerGlow)" />
+                    <circle cx={COF_CX} cy={COF_CY} r="30" fill="url(#cofGlow)" />
                     <defs>
-                        <radialGradient id="centerGlow">
+                        <radialGradient id="cofGlow">
                             <stop offset="0%" stopColor="#84CC1618" />
                             <stop offset="100%" stopColor="#84CC1600" />
                         </radialGradient>
                     </defs>
 
                     {/* Highlighted arcs */}
-                    <path d={outerArcPath} fill="none" stroke="#84CC16" strokeWidth="2" opacity="0.5" />
-                    <path d={arcPath} fill="none" stroke="#84CC16" strokeWidth="2" opacity="0.7" />
+                    <path d={OUTER_ARC_PATH} fill="none" stroke="#84CC16" strokeWidth="2" opacity="0.5" />
+                    <path d={INNER_ARC_PATH} fill="none" stroke="#84CC16" strokeWidth="2" opacity="0.7" />
 
-                    {/* Highlighted fill sector */}
-                    {[0, 1, 2, 3].map((i) => {
-                        const a1 = (i * 30 - 90 - 15) * (Math.PI / 180);
-                        const a2 = (i * 30 - 90 + 15) * (Math.PI / 180);
-                        const path = [
-                            `M ${r2(cx + innerR * Math.cos(a1))} ${r2(cy + innerR * Math.sin(a1))}`,
-                            `A ${innerR} ${innerR} 0 0 1 ${r2(cx + innerR * Math.cos(a2))} ${r2(cy + innerR * Math.sin(a2))}`,
-                            `L ${r2(cx + outerR * Math.cos(a2))} ${r2(cy + outerR * Math.sin(a2))}`,
-                            `A ${outerR} ${outerR} 0 0 0 ${r2(cx + outerR * Math.cos(a1))} ${r2(cy + outerR * Math.sin(a1))}`,
-                            "Z",
-                        ].join(" ");
-                        return (
-                            <path
-                                key={i}
-                                d={path}
-                                fill="#84CC1612"
-                                stroke="#84CC1630"
-                                strokeWidth="0.5"
-                            />
-                        );
-                    })}
+                    {/* Highlighted fill sectors */}
+                    {SECTOR_PATHS.map((d, i) => (
+                        <path
+                            key={i}
+                            d={d}
+                            fill="#84CC1612"
+                            stroke="#84CC1630"
+                            strokeWidth="0.5"
+                        />
+                    ))}
 
                     {/* Connecting lines between highlighted keys */}
-                    {[0, 1, 2].map((i) => {
-                        const p1 = getPos(i, innerR);
-                        const p2 = getPos(i + 1, innerR);
-                        return (
-                            <line
-                                key={`conn-${i}`}
-                                x1={p1.x}
-                                y1={p1.y}
-                                x2={p2.x}
-                                y2={p2.y}
-                                stroke="#84CC16"
-                                strokeWidth="1"
-                                opacity="0.5"
-                            />
-                        );
-                    })}
+                    {[0, 1, 2].map((i) => (
+                        <line
+                            key={`conn-${i}`}
+                            x1={INNER_RING_POSITIONS[i].x}
+                            y1={INNER_RING_POSITIONS[i].y}
+                            x2={INNER_RING_POSITIONS[i + 1].x}
+                            y2={INNER_RING_POSITIONS[i + 1].y}
+                            stroke="#84CC16"
+                            strokeWidth="1"
+                            opacity="0.5"
+                        />
+                    ))}
 
                     {/* Major key labels (outer) */}
                     {MAJOR_KEYS.map((key, i) => {
-                        const pos = getPos(i, outerR + 18);
-                        const isHighlighted = HIGHLIGHTED_MAJOR.has(key);
+                        const pos = MAJOR_LABEL_POSITIONS[i];
+                        const hl = HIGHLIGHTED_MAJOR.has(key);
                         return (
                             <text
                                 key={key}
@@ -204,10 +221,10 @@ function KeyDetectionCard() {
                                 y={pos.y}
                                 textAnchor="middle"
                                 dominantBaseline="central"
-                                fill={isHighlighted ? "#84CC16" : "#444444"}
+                                fill={hl ? "#84CC16" : "#444444"}
                                 fontSize="10"
                                 fontFamily="JetBrains Mono, monospace"
-                                fontWeight={isHighlighted ? "700" : "400"}
+                                fontWeight={hl ? "700" : "400"}
                             >
                                 {key}
                             </text>
@@ -216,8 +233,8 @@ function KeyDetectionCard() {
 
                     {/* Minor key labels (inner) */}
                     {MINOR_KEYS.map((key, i) => {
-                        const pos = getPos(i, innerR - 18);
-                        const isHighlighted = HIGHLIGHTED_KEYS.has(key);
+                        const pos = MINOR_LABEL_POSITIONS[i];
+                        const hl = HIGHLIGHTED_KEYS.has(key);
                         return (
                             <text
                                 key={key}
@@ -225,10 +242,10 @@ function KeyDetectionCard() {
                                 y={pos.y}
                                 textAnchor="middle"
                                 dominantBaseline="central"
-                                fill={isHighlighted ? "#84CC16" : "#333333"}
+                                fill={hl ? "#84CC16" : "#333333"}
                                 fontSize="9"
                                 fontFamily="JetBrains Mono, monospace"
-                                fontWeight={isHighlighted ? "700" : "400"}
+                                fontWeight={hl ? "700" : "400"}
                             >
                                 {key}
                             </text>
@@ -300,52 +317,32 @@ const ENERGY_MODES = [
 
 function RotaryKnob({
     label,
-    value,
+    knob,
 }: {
     label: string;
-    value: number;
+    knob: ReturnType<typeof computeKnob>;
 }) {
-    const r = 22;
-    const cx = 28;
-    const cy = 28;
-    const startAngle = 135;
-    const endAngle = 135 + value * 270;
-
-    const toRad = (deg: number) => (deg * Math.PI) / 180;
-    const trackStart = {
-        x: r2(cx + r * Math.cos(toRad(startAngle))),
-        y: r2(cy + r * Math.sin(toRad(startAngle))),
-    };
-    const arcEnd = {
-        x: r2(cx + r * Math.cos(toRad(endAngle))),
-        y: r2(cy + r * Math.sin(toRad(endAngle))),
-    };
-    const largeArc = endAngle - startAngle > 180 ? 1 : 0;
-
     return (
         <div className="flex flex-col items-center gap-2">
             <svg width="56" height="56" viewBox="0 0 56 56">
-                {/* Track background */}
                 <circle
-                    cx={cx}
-                    cy={cy}
-                    r={r}
+                    cx={knob.cx}
+                    cy={knob.cy}
+                    r={knob.r}
                     fill="#111111"
                     stroke="#1A1A1A"
                     strokeWidth="2"
                 />
-                {/* Value arc */}
                 <path
-                    d={`M ${trackStart.x} ${trackStart.y} A ${r} ${r} 0 ${largeArc} 1 ${arcEnd.x} ${arcEnd.y}`}
+                    d={`M ${knob.startX} ${knob.startY} A ${knob.r} ${knob.r} 0 ${knob.largeArc} 1 ${knob.endX} ${knob.endY}`}
                     fill="none"
                     stroke="#84CC16"
                     strokeWidth="2.5"
                     strokeLinecap="round"
                 />
-                {/* Indicator dot */}
                 <circle
-                    cx={arcEnd.x}
-                    cy={arcEnd.y}
+                    cx={knob.endX}
+                    cy={knob.endY}
                     r="3"
                     fill="#84CC16"
                 />
@@ -407,8 +404,8 @@ function EnergyRoutingCard() {
                                             height: `${h * 100}%`,
                                             background:
                                                 mi === 0
-                                                    ? `rgba(132, 204, 22, ${0.3 + h * 0.7})`
-                                                    : `rgba(132, 204, 22, ${0.15 + h * 0.35})`,
+                                                    ? `rgba(132, 204, 22, ${r2(0.3 + h * 0.7)})`
+                                                    : `rgba(132, 204, 22, ${r2(0.15 + h * 0.35)})`,
                                         }}
                                     />
                                 ))}
@@ -429,8 +426,8 @@ function EnergyRoutingCard() {
                 className="flex items-center justify-center gap-16 py-4"
                 style={{ borderTop: "1px solid #1A1A1A" }}
             >
-                <RotaryKnob label="BPM RANGE" value={0.7} />
-                <RotaryKnob label="ENERGY CURVE" value={0.55} />
+                <RotaryKnob label="BPM RANGE" knob={KNOB_BPM} />
+                <RotaryKnob label="ENERGY CURVE" knob={KNOB_ENERGY} />
             </div>
 
             {/* Bottom stats */}

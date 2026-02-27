@@ -70,7 +70,7 @@ export function HeroSectionPencilTest() {
 
                             {/* Primary CTA */}
                             <Link
-                                href="/optimize"
+                                href="/signup"
                                 className="flex items-center justify-center w-[190px] h-[46px] rounded border-2 border-[#84cc16] bg-transparent text-white text-[13px] font-bold tracking-[2px] hover:bg-[#84cc16] hover:text-black transition-colors"
                             >
                                 TRY IT FREE
@@ -78,7 +78,7 @@ export function HeroSectionPencilTest() {
 
                             {/* Secondary CTA */}
                             <Link
-                                href="/#how-it-works"
+                                href="/how-it-works"
                                 className="text-[13px] text-[#B0B0B0] hover:text-[#84cc16] transition-colors font-medium"
                                 style={{
                                     textShadow: "0 1px 2px rgba(0,0,0,1), 0 0 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.6)",
