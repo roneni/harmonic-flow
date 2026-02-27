@@ -66,3 +66,9 @@ body {
 .animate-scroll-left:hover {
   animation-play-state: paused;
 }
+
+/* Nav link hover glow */
+.nav-link:hover {
+  color: #84cc16 !important;
+  text-shadow: 0 0 8px var(--color-primary-glow), 0 0 16px var(--color-primary-glow);
+}

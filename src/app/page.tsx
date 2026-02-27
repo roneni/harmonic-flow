@@ -1,13 +1,10 @@
 import { HeroSectionPencilTest } from "@/components/landing/hero-section-pencil-test";
-import { IntegrationBar } from "@/components/landing/integration-bar";
-import { ProblemSection } from "@/components/landing/problem-section";
-import { HowItWorks } from "@/components/landing/how-it-works";
-import { FeaturesGrid } from "@/components/landing/features-grid";
-import { SocialProof } from "@/components/landing/social-proof";
-import { CtaSection } from "@/components/landing/cta-section";
+import UniversalIntegration from "@/components/landing/universal-integration";
+
 import { UploadPanel } from "@/components/landing/upload-panel";
 import { TracklistComparison } from "@/components/landing/tracklist-comparison";
 import FeatureCards from "@/components/landing/feature-cards";
+import FounderStory from "@/components/landing/founder-story";
 
 export default function HomePage() {
   return (
@@ -23,12 +20,8 @@ export default function HomePage() {
         </div>
         <FeatureCards />
       </section>
-      <IntegrationBar />
-      <ProblemSection />
-      <HowItWorks />
-      <FeaturesGrid />
-      <SocialProof />
-      <CtaSection />
+      <UniversalIntegration />
+      <FounderStory />
     </>
   );
 }

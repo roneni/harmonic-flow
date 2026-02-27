@@ -7,7 +7,7 @@ const STEPS = [
     number: "01",
     title: "Upload",
     description:
-      "Drop your Rekordbox XML, CSV, or TXT playlist export. We parse everything client-side - your files never leave your browser.",
+      "Drop your Rekordbox file (.txt). Serato and Traktor, coming soon. We parse everything client-side - your files never leave your browser.",
   },
   {
     number: "02",
@@ -48,7 +48,7 @@ export function HowItWorks() {
               }`}
               style={{ transitionDelay: `${i * 150}ms` }}
             >
-              <div className="mb-4 text-4xl font-black text-primary/20">
+              <div className="mb-4 text-4xl font-black text-primary">
                 {step.number}
               </div>
               <h3 className="text-lg font-semibold text-text-primary">

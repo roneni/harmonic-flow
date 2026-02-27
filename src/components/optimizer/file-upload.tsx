@@ -100,7 +100,7 @@ export function FileUpload({ onFileSelect, disabled }: FileUploadProps) {
         Drop your playlist file here
       </p>
       <p className="mt-2 text-sm text-text-secondary">
-        or click to browse - supports Rekordbox XML, CSV, and TXT
+        or click to browse - supports Rekordbox TXT. Serato and Traktor, coming soon
       </p>
     </div>
   );

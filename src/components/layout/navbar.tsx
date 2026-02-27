@@ -30,29 +30,22 @@ export function Navbar() {
         {/* Center nav links */}
         <div className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
           <Link
-            href="/#features"
-            className="text-sm font-medium transition-colors hover:text-white"
+            href="/"
+            className="nav-link text-sm font-medium transition-all hover:text-white"
             style={{ color: "#888888" }}
           >
-            Features
+            Home
           </Link>
           <Link
-            href="/#how-it-works"
-            className="text-sm font-medium transition-colors hover:text-white"
+            href="/how-it-works"
+            className="nav-link text-sm font-medium transition-all hover:text-white"
             style={{ color: "#888888" }}
           >
             How It Works
           </Link>
           <Link
-            href="/#pricing"
-            className="text-sm font-medium transition-colors hover:text-white"
-            style={{ color: "#888888" }}
-          >
-            Pricing
-          </Link>
-          <Link
             href="/#support"
-            className="text-sm font-medium transition-colors hover:text-white"
+            className="nav-link text-sm font-medium transition-all hover:text-white"
             style={{ color: "#888888" }}
           >
             Support
