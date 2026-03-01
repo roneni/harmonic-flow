@@ -82,8 +82,12 @@ export function Footer() {
           </div>
         </div>
         {/* Bottom bar */}
-        <div className="mt-10 border-t border-text-secondary/10 pt-6 text-center text-sm text-text-secondary">
-          &copy; {year} HarmonySet. Built with care for the DJ community.
+        <div className="mt-10 border-t border-text-secondary/10 pt-6 flex items-center justify-center gap-4 text-sm text-text-secondary">
+          <span>&copy; {year} HarmonySet. Built with care for the DJ community.</span>
+          <span className="text-text-secondary/30">|</span>
+          <Link href="/privacy" className="transition-colors hover:text-primary">
+            Privacy Policy
+          </Link>
         </div>
       </div>
     </footer>
