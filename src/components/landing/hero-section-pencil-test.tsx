@@ -3,8 +3,11 @@
 import Link from "next/link";
 import { JogWheel } from "./jog-wheel";
 import { ThumbnailMosaic } from "./thumbnail-mosaic";
+import { useAuth } from "@/components/auth/auth-provider";
 
 export function HeroSectionPencilTest() {
+    const { user } = useAuth();
+
     return (
         <section
             style={{ background: "#0a0a0a" }}
@@ -73,10 +76,10 @@ export function HeroSectionPencilTest() {
 
                             {/* Primary CTA */}
                             <Link
-                                href="/signup"
+                                href={user ? "/optimize" : "/signup"}
                                 className="flex items-center justify-center w-[190px] h-[46px] rounded border-2 border-[#84cc16] bg-transparent text-white text-[13px] font-bold tracking-[2px] hover:bg-[#84cc16] hover:text-black transition-colors"
                             >
-                                TRY IT FREE
+                                {user ? "OPTIMIZE" : "TRY IT FREE"}
                             </Link>
 
                             {/* Secondary CTA */}

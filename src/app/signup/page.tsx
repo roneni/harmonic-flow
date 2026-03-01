@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { AuthForm } from "@/components/auth/auth-form";
 
@@ -15,7 +16,9 @@ export default function SignupPage() {
         </p>
       </div>
 
-      <AuthForm mode="signup" />
+      <Suspense>
+        <AuthForm mode="signup" />
+      </Suspense>
 
       <p className="mt-6 text-center text-sm text-text-secondary">
         Already have an account?{" "}

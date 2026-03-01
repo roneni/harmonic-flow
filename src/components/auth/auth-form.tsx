@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 interface AuthFormProps {
@@ -9,6 +9,8 @@ interface AuthFormProps {
 }
 
 export function AuthForm({ mode }: AuthFormProps) {
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || "/optimize";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
@@ -44,7 +46,7 @@ export function AuthForm({ mode }: AuthFormProps) {
         });
 
         if (error) throw error;
-        router.push("/optimize");
+        router.push(redirectTo);
         router.refresh();
       }
     } catch (err) {
@@ -63,7 +65,7 @@ export function AuthForm({ mode }: AuthFormProps) {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${location.origin}/auth/callback`,
+          redirectTo: `${location.origin}/auth/callback?next=${encodeURIComponent(redirectTo)}`,
         },
       });
       if (error) throw error;

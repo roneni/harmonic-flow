@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/components/auth/auth-provider";
 import { useOptimizer } from "@/hooks/use-optimizer";
 import { FileUpload } from "@/components/optimizer/file-upload";
 import { TrackTable } from "@/components/optimizer/track-table";
@@ -9,6 +11,15 @@ import { OptimizationResults } from "@/components/optimizer/optimization-results
 import { ProcessingOverlay } from "@/components/optimizer/processing-overlay";
 
 export default function OptimizePage() {
+  const { user, loading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.replace("/login?redirect=/optimize");
+    }
+  }, [loading, user, router]);
+
   const {
     step,
     file,
@@ -29,6 +40,15 @@ export default function OptimizePage() {
       parseSelectedFile();
     }
   }, [step, parseSelectedFile]);
+
+  // Show nothing while checking auth or redirecting
+  if (loading || !user) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-12">
