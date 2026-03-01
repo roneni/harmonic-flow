@@ -4,19 +4,19 @@
 const DJ_SOFTWARE = [
     {
         logo: "/logos/rekordbox.svg",
-        alt: "Rekordbox",
+        alt: "Rekordbox logo",
         height: 28,
         badge: "v6.x / v7.x VERIFIED",
     },
     {
         logo: "/logos/serato.svg",
-        alt: "Serato",
+        alt: "Serato logo",
         height: 28,
         badge: "DJ PRO / DJ LITE VERIFIED",
     },
     {
         logo: "/logos/traktor.svg",
-        alt: "Traktor",
+        alt: "Traktor logo",
         height: 25,
         badge: "PRO 3 / PRO 4 VERIFIED",
     },
@@ -125,7 +125,7 @@ export default function UniversalIntegration() {
                 </div>
 
                 {/* Import → HarmonySet → Export flow */}
-                <div className="flex items-center gap-3 font-mono">
+                <div className="flex items-center gap-3 font-mono" role="img" aria-label="Signal flow diagram: XML input through HarmonySet to XML output">
                     <span
                         className="text-[10px] font-semibold"
                         style={{ color: "#666666", letterSpacing: "1px" }}

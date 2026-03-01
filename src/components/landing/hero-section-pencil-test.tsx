@@ -13,6 +13,9 @@ export function HeroSectionPencilTest() {
             {/* ORIGINAL: YouTube thumbnail mosaic background */}
             <ThumbnailMosaic />
 
+            {/* SEO: visually hidden H1 with target keyword */}
+            <h1 className="sr-only">DJ Playlist Optimizer for Harmonic Mixing — Free Online Tool</h1>
+
             <div className="relative mx-auto max-w-7xl">
                 <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
 
@@ -28,9 +31,9 @@ export function HeroSectionPencilTest() {
                         </div>
 
                         {/* Headline */}
-                        <h1 className="mt-[26px] md:mt-[36px] font-black leading-[0.92] text-white tracking-[-1.6px]" style={{ fontSize: "clamp(56px, 8vw, 80px)" }}>
+                        <div className="mt-[26px] md:mt-[36px] font-black leading-[0.92] text-white tracking-[-1.6px]" style={{ fontSize: "clamp(56px, 8vw, 80px)" }}>
                             HARMONIC<br />PRECISION
-                        </h1>
+                        </div>
 
                         {/* Slogan */}
                         <p className="mt-[14px] text-[22px] md:text-[26px] font-semibold tracking-[0.5px] text-[#84cc16]">

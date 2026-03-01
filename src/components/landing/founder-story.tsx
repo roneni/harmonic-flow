@@ -163,7 +163,7 @@ function VuMeterPanel() {
 
 export default function FounderStory() {
   return (
-    <section className="relative w-full overflow-hidden" style={{ height: 900 }}>
+    <section id="support" className="relative w-full overflow-hidden" style={{ height: 900 }}>
       {/* Background image */}
       <div
         className="absolute inset-0 bg-cover bg-center"

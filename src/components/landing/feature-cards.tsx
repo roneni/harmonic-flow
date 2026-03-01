@@ -167,7 +167,7 @@ function KeyDetectionCard() {
 
             {/* Circle of Fifths SVG */}
             <div className="flex-1 flex items-center justify-center px-4 py-3">
-                <svg viewBox="0 0 300 290" className="w-full max-w-[300px]">
+                <svg viewBox="0 0 300 290" className="w-full max-w-[300px]" role="img" aria-label="Circle of Fifths key detection visualization">
                     {/* Outer circle ring */}
                     <circle cx={COF_CX} cy={COF_CY} r={COF_OUTER_R} fill="none" stroke="#1A1A1A" strokeWidth="1" />
                     {/* Inner circle ring */}
@@ -324,7 +324,7 @@ function RotaryKnob({
 }) {
     return (
         <div className="flex flex-col items-center gap-2">
-            <svg width="56" height="56" viewBox="0 0 56 56">
+            <svg width="56" height="56" viewBox="0 0 56 56" role="img" aria-label={`${label} rotary control`}>
                 <circle
                     cx={knob.cx}
                     cy={knob.cy}
@@ -497,6 +497,8 @@ function XmlParserCard() {
             <div
                 className="flex-1 flex flex-col gap-0.5 px-4 py-3 overflow-hidden"
                 style={{ background: "#080808" }}
+                role="img"
+                aria-label="Rekordbox XML parsing example showing track data extraction"
             >
                 {XML_LINES.map((line) => (
                     <div key={line.num} className="flex items-center">

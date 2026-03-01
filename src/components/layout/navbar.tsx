@@ -44,6 +44,13 @@ export function Navbar() {
             How It Works
           </Link>
           <Link
+            href="/guides"
+            className="nav-link text-sm font-medium transition-all hover:text-white"
+            style={{ color: "#888888" }}
+          >
+            Guides
+          </Link>
+          <Link
             href="/#support"
             className="nav-link text-sm font-medium transition-all hover:text-white"
             style={{ color: "#888888" }}

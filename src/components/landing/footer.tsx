@@ -28,9 +28,9 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="/#how-it-works" className="text-sm text-text-secondary transition-colors hover:text-primary">
+                <Link href="/how-it-works" className="text-sm text-text-secondary transition-colors hover:text-primary">
                   How It Works
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

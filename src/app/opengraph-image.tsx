@@ -10,7 +10,7 @@ export default async function Image() {
     (
       <div
         style={{
-          background: "linear-gradient(135deg, #0a0a0f 0%, #0f1729 50%, #0a0a0f 100%)",
+          background: "linear-gradient(135deg, #0a0a0a 0%, #111111 50%, #0a0a0a 100%)",
           width: "100%",
           height: "100%",
           display: "flex",
@@ -30,7 +30,7 @@ export default async function Image() {
             width: "400px",
             height: "400px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(45,212,191,0.15) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(132,204,22,0.15) 0%, transparent 70%)",
             display: "flex",
           }}
         />
@@ -43,7 +43,7 @@ export default async function Image() {
             width: "400px",
             height: "400px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(139,92,246,0.15) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(132,204,22,0.10) 0%, transparent 70%)",
             display: "flex",
           }}
         />
@@ -69,14 +69,14 @@ export default async function Image() {
             }}
           >
             Harmony
-            <span style={{ color: "#2dd4bf" }}>Set</span>
+            <span style={{ color: "#84CC16" }}>Set</span>
           </div>
           {/* Tagline */}
           <div
             style={{
               fontSize: 32,
               fontWeight: 600,
-              color: "#2dd4bf",
+              color: "#84CC16",
               display: "flex",
             }}
           >
@@ -107,9 +107,9 @@ export default async function Image() {
                 style={{
                   padding: "8px 20px",
                   borderRadius: "999px",
-                  border: "1px solid rgba(45,212,191,0.3)",
-                  backgroundColor: "rgba(45,212,191,0.05)",
-                  color: "#2dd4bf",
+                  border: "1px solid rgba(132,204,22,0.3)",
+                  backgroundColor: "rgba(132,204,22,0.05)",
+                  color: "#84CC16",
                   fontSize: 16,
                   fontWeight: 500,
                   display: "flex",

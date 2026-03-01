@@ -144,7 +144,7 @@ function ColumnHeader({ label, variant }: { label: string; variant: "original" |
 function RoutingPaths() {
     return (
         <div className="hidden md:flex items-center justify-center h-full w-full">
-            <svg viewBox="0 0 60 320" className="w-[60px] h-[280px]" fill="none">
+            <svg viewBox="0 0 60 320" className="w-[60px] h-[280px]" fill="none" role="img" aria-label="Routing diagram showing track reordering from original to harmonically optimized order">
                 <defs>
                     {/* Green glow filter */}
                     <filter id="glow-green" x="-50%" y="-50%" width="200%" height="200%">

@@ -5,9 +5,9 @@ export function StructuredData() {
     name: "HarmonySet",
     url: "https://www.harmonyset.com",
     description:
-      "Mathematically optimize your DJ playlist for perfect harmonic mixing using the circle of fifths and Held-Karp algorithm. Works with Rekordbox, Traktor, and Serato exports.",
+      "Free DJ playlist optimizer that reorders tracks for harmonic mixing using the Circle of Fifths. Upload your Rekordbox export and get the mathematically optimal track order in seconds.",
     applicationCategory: "MusicApplication",
-    operatingSystem: "Web Browser",
+    operatingSystem: "Any",
     browserRequirements: "Requires JavaScript",
     offers: {
       "@type": "Offer",
@@ -15,13 +15,14 @@ export function StructuredData() {
       priceCurrency: "USD",
     },
     featureList: [
-      "Harmonic mixing optimization using circle of fifths",
-      "Held-Karp dynamic programming algorithm",
-      "Rekordbox XML import",
-      "Traktor and Serato CSV import",
-      "BPM-based energy flow control with 3 modes",
-      "Before/after quality scoring 0-100",
-      "100% client-side processing — files never leave your browser",
+      "Harmonic playlist optimization using Circle of Fifths",
+      "Held-Karp algorithm for mathematically optimal track ordering",
+      "Rekordbox TXT and XML import",
+      "Three energy modes: Ramp Up, Ramp Down, Wave",
+      "Before/after quality score comparison",
+      "Circle of Fifths harmonic path visualization",
+      "Per-transition color-coded quality indicators",
+      "Client-side processing — files never leave your browser",
       "CSV export of optimized playlist",
     ],
   };

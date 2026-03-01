@@ -201,7 +201,8 @@ export function JogWheel() {
               viewBox={`-${VB} -${VB} ${VB * 2} ${VB * 2}`}
               width={SIZE}
               height={SIZE}
-              aria-label="Circle of Fifths jog wheel"
+              role="img"
+              aria-label="Circle of Fifths jog wheel showing harmonic key relationships"
             >
               <defs>
                 {/* Platter surface — dark off-centre radial gradient for vinyl depth */}
