@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code Workflow Cheatsheet — Definitive Edition 2026</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: #f5f5f0;
+    color: #1a1a1a;
+    padding: 24px;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  h1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #666;
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .card {
+    background: #fff;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 14px 16px;
+    position: relative;
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #1a1a1a;
+    padding-bottom: 6px;
+  }
+  .card-num {
+    background: #1a1a1a;
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .card p { margin-bottom: 6px; }
+  .card ul { padding-left: 16px; margin-bottom: 6px; }
+  .card li { margin-bottom: 2px; }
+  pre, code {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 11.5px;
+  }
+  pre {
+    background: #f7f7f5;
+    border: 1px solid #e8e8e5;
+    border-radius: 4px;
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    overflow-x: auto;
+    white-space: pre;
+  }
+  code {
+    background: #f0f0ed;
+    padding: 1px 4px;
+    border-radius: 3px;
+  }
+  pre code { background: none; padding: 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+  th {
+    background: #f7f7f5;
+    text-align: left;
+    font-weight: 600;
+    padding: 4px 6px;
+    border-bottom: 1.5px solid #ddd;
+  }
+  td {
+    padding: 3px 6px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+  }
+  .tag {
+    display: inline-block;
+    background: #e8e8e5;
+    border-radius: 3px;
+    padding: 1px 6px;
+    font-size: 11px;
+    font-family: 'SF Mono', monospace;
+    margin: 1px 2px;
+  }
+  .tag-green { background: #d4edda; color: #155724; }
+  .tag-blue { background: #d1ecf1; color: #0c5460; }
+  .tag-amber { background: #fff3cd; color: #856404; }
+  .tag-red { background: #f8d7da; color: #721c24; }
+  .tag-purple { background: #e8daef; color: #4a235a; }
+  .highlight { background: #fff9e6; border-color: #f0d860; }
+  .layers-table td:first-child { font-weight: 700; width: 30px; }
+  .layers-table td:nth-child(2) { font-weight: 600; }
+  .tree { font-family: 'SF Mono', monospace; font-size: 11.5px; line-height: 1.5; }
+  .comment { color: #888; font-style: italic; }
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #888;
+    margin-bottom: 4px;
+    margin-top: 6px;
+  }
+  .wide { grid-column: span 2; }
+  .full { grid-column: span 3; }
+  .footer {
+    max-width: 1200px;
+    margin: 16px auto 0;
+    padding: 10px 16px;
+    background: #fff;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 11px;
+    color: #666;
+    text-align: center;
+  }
+  strong { font-weight: 600; }
+  .cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .cols-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+  @media print {
+    body { padding: 12px; font-size: 11px; }
+    .grid { gap: 10px; }
+    .card { padding: 10px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Claude Code Workflow Cheatsheet</h1>
+<p class="subtitle">Getting Started &middot; Project Setup &middot; File Structure &middot; Skills &middot; MCP &middot; Hooks &middot; Memory &middot; Agents &middot; Workflows &mdash; Definitive Edition 2026</p>
+
+<div class="grid">
+
+<!-- 1. Getting Started -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num">1</span>
+    <span class="card-title">Getting Started</span>
+  </div>
+  <p>Install Claude Code <strong>(native installer — no Node.js needed)</strong></p>
+<pre><code># Recommended (auto-updates)
+curl -fsSL https://claude.ai/install.sh | bash
+
+# macOS Homebrew
+brew install --cask claude-code
+
+# Windows PowerShell
+irm https://claude.ai/install.ps1 | iex
+
+# Windows WinGet
+winget install Anthropic.ClaudeCode</code></pre>
+  <p><strong>Requirements:</strong> macOS 13+, Windows 10+, Ubuntu 20.04+, 4GB+ RAM</p>
+<pre><code>cd your-project
+claude
+/init</code></pre>
+  <p style="color:#666; font-size:11px;">Scans your codebase and creates a starter CLAUDE.md</p>
+</div>
+
+<!-- 2. Understanding CLAUDE.md -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num">2</span>
+    <span class="card-title">Understanding CLAUDE.md</span>
+  </div>
+  <p><strong>CLAUDE.md</strong> = Claude's persistent memory about your project.<br>Loaded automatically at the start of every session.</p>
+  <div style="display:flex; gap:6px; margin:8px 0;">
+    <span class="tag tag-blue">WHAT</span>
+    <span class="tag tag-green">WHY</span>
+    <span class="tag tag-amber">HOW</span>
+  </div>
+  <table>
+    <tr><td>Tech stack</td><td>Purpose of each module</td><td>Build/test/lint commands</td></tr>
+    <tr><td>Directory map</td><td>Design decisions</td><td>Workflows</td></tr>
+    <tr><td>Architecture</td><td>Constraints</td><td>Conventions</td></tr>
+  </table>
+<pre><code># Project: MyApp
+FastAPI REST API + React SPA + Postgres
+
+## Commands
+npm run dev / npm run test / npm run lint
+
+## Architecture
+/app &rarr; Next.js App Router pages
+/lib &rarr; shared utilities
+/prisma &rarr; DB schema & migrations</code></pre>
+</div>
+
+<!-- 3. Memory File Hierarchy -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num">3</span>
+    <span class="card-title">Memory File Hierarchy</span>
+  </div>
+  <table>
+    <tr><td><code>~/.claude/CLAUDE.md</code></td><td>Global — all projects</td></tr>
+    <tr><td><code>/CLAUDE.md</code></td><td>Project root — shared on git</td></tr>
+    <tr><td><code>./frontend/CLAUDE.md</code></td><td>Subfolder — scoped content (lazy-loaded)</td></tr>
+    <tr><td><code>CLAUDE.local.md</code></td><td>Personal overrides — gitignored</td></tr>
+    <tr><td><code>~/.claude/projects/&lt;p&gt;/memory/</code></td><td>Auto-memory — Claude writes for itself</td></tr>
+  </table>
+  <div class="section-label">Managed Policy (org-wide, read-only)</div>
+  <p style="font-size:11px;">macOS: <code>/Library/Application Support/ClaudeCode/CLAUDE.md</code><br>Linux: <code>/etc/claude-code/CLAUDE.md</code></p>
+  <div class="section-label" style="margin-top:8px;">Conflict Resolution</div>
+  <ul>
+    <li>Keep each file <strong>&lt;200 lines</strong></li>
+    <li><strong>More specific levels WIN</strong> on conflicts</li>
+    <li>Subfolder overrides parent</li>
+    <li>Ancestors load at startup; descendants lazy-load</li>
+    <li>Never overwrite parent context</li>
+  </ul>
+</div>
+
+<!-- 4. CLAUDE.md Best Practices -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num">4</span>
+    <span class="card-title">CLAUDE.md Best Practices</span>
+  </div>
+  <ul>
+    <li>Run <code>/init</code> first then refine output</li>
+    <li>Be specific in instructions</li>
+    <li>Add gotchas Claude cannot infer from code</li>
+    <li>Reference docs with <code>@filename</code></li>
+    <li>Add workflow rules</li>
+    <li>Keep memory concise — every line costs context</li>
+    <li>Commit to Git for team sharing</li>
+    <li>Use <code>.claude/rules/</code> for file-scoped rules (glob patterns)</li>
+  </ul>
+  <div class="section-label" style="margin-top:8px;">File-Scoped Rules</div>
+<pre><code># .claude/rules/api-routes.md
+---
+paths:
+  - "src/api/**/*.ts"
+---
+All endpoints must include input validation
+All responses use standard error format</code></pre>
+</div>
+
+<!-- 5. Project File Structure -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num">5</span>
+    <span class="card-title">Project File Structure</span>
+  </div>
+  <div class="tree">
+your-project/<br>
+&#9500;&#9472; CLAUDE.md<br>
+&#9500;&#9472; CLAUDE.local.md <span class="comment">(gitignored)</span><br>
+&#9500;&#9472; .claude/<br>
+&#9474;&nbsp; &#9500;&#9472; settings.json <span class="comment">(shared)</span><br>
+&#9474;&nbsp; &#9500;&#9472; settings.local.json <span class="comment">(personal)</span><br>
+&#9474;&nbsp; &#9500;&#9472; skills/ <span class="comment">&larr; replaces commands/</span><br>
+&#9474;&nbsp; &#9474;&nbsp; &#9500;&#9472; code-review/<br>
+&#9474;&nbsp; &#9474;&nbsp; &#9474;&nbsp; &#9492;&#9472; SKILL.md<br>
+&#9474;&nbsp; &#9474;&nbsp; &#9492;&#9472; testing/<br>
+&#9474;&nbsp; &#9474;&nbsp; &nbsp;&nbsp; &#9492;&#9472; SKILL.md<br>
+&#9474;&nbsp; &#9500;&#9472; agents/ <span class="comment">&larr; custom subagents</span><br>
+&#9474;&nbsp; &#9474;&nbsp; &#9492;&#9472; security-reviewer.md<br>
+&#9474;&nbsp; &#9492;&#9472; rules/ <span class="comment">&larr; file-scoped rules</span><br>
+&#9474;&nbsp; &nbsp;&nbsp; &#9492;&#9472; typescript.md<br>
+&#9500;&#9472; .mcp.json <span class="comment">(MCP servers)</span><br>
+&#9500;&#9472; .gitignore<br>
+&#9492;&#9472; src/
+  </div>
+</div>
+
+<!-- 6. Adding Skills -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num">6</span>
+    <span class="card-title">Adding Skills (The Superpower)</span>
+  </div>
+  <p><strong>Skills</strong> = markdown guides Claude auto-invokes via natural language.</p>
+  <div class="cols-2" style="margin: 6px 0;">
+    <div><span class="tag tag-blue">Project skill</span><br><code style="font-size:10px;">.claude/skills/&lt;name&gt;/SKILL.md</code></div>
+    <div><span class="tag tag-purple">Personal skill</span><br><code style="font-size:10px;">~/.claude/skills/&lt;name&gt;/SKILL.md</code></div>
+  </div>
+<pre><code>name: testing-patterns
+description: Jest testing patterns
+allowed-tools: Read, Grep, Glob
+
+# Testing Patterns
+Use describe + it + AAA pattern
+Use factory mocks
+Always test error paths</code></pre>
+  <p><span class="tag tag-red">Critical</span> <strong>Description field</strong> is critical for auto-activation. Descriptions load at startup; full content loads on invoke. Use <code>context: fork</code> to run in isolated subagent.</p>
+  <div class="section-label">Skill Ideas</div>
+  <div style="display:flex; flex-wrap:wrap; gap:4px;">
+    <span class="tag">code-review</span>
+    <span class="tag">testing-patterns</span>
+    <span class="tag">commit-messages</span>
+    <span class="tag">docker-deploy</span>
+    <span class="tag">codebase-visualizer</span>
+    <span class="tag">api-design</span>
+    <span class="tag">security-audit</span>
+    <span class="tag">db-migrations</span>
+  </div>
+</div>
+
+<!-- 7. MCP (Model Context Protocol) -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num">7</span>
+    <span class="card-title">MCP (Model Context Protocol)</span>
+  </div>
+  <p>Connect Claude Code to external tools, databases, and APIs.</p>
+<pre><code># Add HTTP server (remote)
+claude mcp add --transport http \
+  serverName https://api.example.com/mcp
+
+# Add stdio server (local)
+claude mcp add --transport stdio \
+  serverName -- npx package-name
+
+# Add with auth
+claude mcp add --transport http \
+  --header "Authorization: Bearer TOKEN" \
+  serverName URL
+
+# List / manage
+claude mcp list
+/mcp  # in-session</code></pre>
+  <div class="section-label">Config Locations (priority order)</div>
+  <table>
+    <tr><td><strong>Local</strong></td><td><code>.claude/settings.local.json</code></td></tr>
+    <tr><td><strong>Project</strong></td><td><code>.mcp.json</code> (committed)</td></tr>
+    <tr><td><strong>User</strong></td><td><code>~/.claude.json</code></td></tr>
+    <tr><td><strong>Managed</strong></td><td>System-level (org-wide)</td></tr>
+  </table>
+  <div class="section-label">Permission Rules</div>
+  <p><code>mcp__servername__toolname</code> or <code>mcp__servername__*</code></p>
+</div>
+
+<!-- 8. Setting Up Hooks -->
+<div class="card wide">
+  <div class="card-header">
+    <span class="card-num">8</span>
+    <span class="card-title">Setting Up Hooks</span>
+  </div>
+  <p><strong>Hooks</strong> = deterministic callbacks (not LLM-dependent)</p>
+  <div class="cols-2">
+    <div>
+      <div class="section-label">All Hook Events</div>
+      <table>
+        <thead><tr><th>Event</th><th>Blockable</th></tr></thead>
+        <tr><td><code>SessionStart</code></td><td>No</td></tr>
+        <tr><td><code>InstructionsLoaded</code></td><td>No</td></tr>
+        <tr><td><code>UserPromptSubmit</code></td><td>Yes</td></tr>
+        <tr><td><code>PreToolUse</code></td><td>Yes</td></tr>
+        <tr><td><code>PostToolUse</code></td><td>No</td></tr>
+        <tr><td><code>PostToolUseFailure</code></td><td>No</td></tr>
+        <tr><td><code>PermissionRequest</code></td><td>Yes</td></tr>
+        <tr><td><code>Notification</code></td><td>No</td></tr>
+        <tr><td><code>SubagentStart</code></td><td>No</td></tr>
+        <tr><td><code>SubagentStop</code></td><td>Yes</td></tr>
+        <tr><td><code>Stop</code></td><td>Yes</td></tr>
+        <tr><td><code>PreCompact</code></td><td>No</td></tr>
+        <tr><td><code>ConfigChange</code></td><td>Yes</td></tr>
+        <tr><td><code>TeammateIdle</code></td><td>Yes</td></tr>
+        <tr><td><code>TaskCompleted</code></td><td>Yes</td></tr>
+        <tr><td><code>WorktreeCreate</code></td><td>No</td></tr>
+        <tr><td><code>WorktreeRemove</code></td><td>No</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="section-label">Hook Types</div>
+      <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:8px;">
+        <span class="tag tag-blue">command</span>
+        <span class="tag tag-green">http</span>
+        <span class="tag tag-amber">prompt</span>
+        <span class="tag tag-purple">agent</span>
+      </div>
+<pre><code>{
+  "hooks": {
+    "PreToolUse": [{
+      "matcher": "Bash",
+      "hooks": [{
+        "type": "command",
+        "command": "./scripts/validate.sh",
+        "timeout": 10
+      }]
+    }]
+  }
+}</code></pre>
+      <div class="section-label">Exit Codes</div>
+      <table>
+        <tr><td><strong>0</strong></td><td>allow (approve action)</td></tr>
+        <tr><td><strong>2</strong></td><td>block (deny action)</td></tr>
+      </table>
+      <p style="font-size:11px; color:#666;">Exit code 2 only works on blockable events.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 9. Permissions & Safety -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num">9</span>
+    <span class="card-title">Permissions & Safety</span>
+  </div>
+  <div class="section-label">Permission Modes</div>
+  <table>
+    <tr><td><code>default</code></td><td>Prompts on first use</td></tr>
+    <tr><td><code>acceptEdits</code></td><td>Auto-accepts file edits</td></tr>
+    <tr><td><code>plan</code></td><td>Read-only mode</td></tr>
+    <tr><td><code>dontAsk</code></td><td>Auto-denies unless pre-approved</td></tr>
+    <tr><td><code>bypassPermissions</code></td><td>Skips ALL checks (danger)</td></tr>
+  </table>
+<pre><code>{
+  "permissions": {
+    "allow": ["Bash(npm run lint:*)"],
+    "ask":   ["Bash(git push *)"],
+    "deny":  ["Read(.env)",
+              "Bash(rm -rf *)"]
+  }
+}</code></pre>
+  <p><strong>Eval order:</strong> <span class="tag tag-red">deny</span> &rarr; <span class="tag tag-amber">ask</span> &rarr; <span class="tag tag-green">allow</span></p>
+  <div class="section-label">Settings Precedence</div>
+  <p style="font-size:11px;">Managed &rarr; CLI flags &rarr; Local project &rarr; Shared project &rarr; User</p>
+</div>
+
+<!-- 10. 5-Layer Architecture -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num">10</span>
+    <span class="card-title">The 5-Layer Architecture</span>
+  </div>
+  <table class="layers-table">
+    <tr><td>L1</td><td>CLAUDE.md</td><td>Persistent context and rules</td></tr>
+    <tr><td>L2</td><td>Skills</td><td>On-demand knowledge packs</td></tr>
+    <tr><td>L3</td><td>MCP</td><td>External service connections</td></tr>
+    <tr><td>L4</td><td>Hooks</td><td>Deterministic automation</td></tr>
+    <tr><td>L5</td><td>Agents</td><td>Isolated context subagents</td></tr>
+  </table>
+  <div style="font-size:11px; color:#888; border-top:1px solid #eee; padding-top:6px; margin-top:4px;">
+    L1-L2 provide context. L3 provides external tools.<br>L4 provides guardrails. L5 provides parallelism.
+  </div>
+</div>
+
+<!-- 11. Custom Agents -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num">11</span>
+    <span class="card-title">Custom Agents / Subagents</span>
+  </div>
+  <p>Markdown files with YAML frontmatter in <code>.claude/agents/</code></p>
+<pre><code>---
+name: code-reviewer
+description: Reviews code for quality
+tools: Read, Glob, Grep, Bash
+model: sonnet
+memory: project
+---
+
+You are a senior code reviewer.
+When invoked:
+1. Run git diff to see changes
+2. Review for clarity & security</code></pre>
+  <div class="section-label">Key Frontmatter Fields</div>
+  <table>
+    <tr><td><code>name</code> *</td><td>Unique ID (lowercase, hyphens)</td></tr>
+    <tr><td><code>description</code> *</td><td>When to invoke</td></tr>
+    <tr><td><code>tools</code></td><td>Available tools</td></tr>
+    <tr><td><code>model</code></td><td>sonnet / opus / haiku / inherit</td></tr>
+    <tr><td><code>memory</code></td><td>user / project / local</td></tr>
+    <tr><td><code>isolation</code></td><td>worktree for isolated copy</td></tr>
+    <tr><td><code>background</code></td><td>Run as background task</td></tr>
+    <tr><td><code>maxTurns</code></td><td>Max agentic turns</td></tr>
+  </table>
+</div>
+
+<!-- 12. Daily Workflow Pattern -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num">12</span>
+    <span class="card-title">Daily Workflow Pattern</span>
+  </div>
+  <table>
+    <tr><td><code>cd project && claude</code></td><td></td></tr>
+    <tr><td><code>Shift+Tab</code> &rarr; Plan Mode</td><td>Read-only first</td></tr>
+    <tr><td>Describe feature intent</td><td></td></tr>
+    <tr><td><code>Shift+Tab</code> &rarr; Auto Accept</td><td>When ready to edit</td></tr>
+    <tr><td><code>/compact</code></td><td>Compress proactively</td></tr>
+    <tr><td><code>Esc Esc</code> &rarr; <code>/rewind</code></td><td>Undo mistakes</td></tr>
+    <tr><td>Commit frequently</td><td></td></tr>
+    <tr><td><strong>Start new session per feature</strong></td><td></td></tr>
+  </table>
+  <div class="section-label" style="margin-top:8px;">Context Management</div>
+  <ul>
+    <li><code>/context</code> — visualize usage as colored grid</li>
+    <li><code>/cost</code> — check token usage</li>
+    <li>Delegate verbose tasks to subagents</li>
+    <li>Move large instructions to <code>.claude/rules/</code></li>
+    <li>Move task guides to skills (load on-demand)</li>
+  </ul>
+</div>
+
+<!-- 13. Tools Available -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num">13</span>
+    <span class="card-title">Tools Available to Claude Code</span>
+  </div>
+  <table>
+    <tr><td><code>Bash</code></td><td>Execute shell commands</td></tr>
+    <tr><td><code>Read</code></td><td>Read files, images, PDFs, notebooks</td></tr>
+    <tr><td><code>Edit</code></td><td>Exact string replacements</td></tr>
+    <tr><td><code>Write</code></td><td>Create or overwrite files</td></tr>
+    <tr><td><code>Glob</code></td><td>Fast file pattern matching</td></tr>
+    <tr><td><code>Grep</code></td><td>Regex search file contents</td></tr>
+    <tr><td><code>Agent</code></td><td>Launch specialized subagents</td></tr>
+    <tr><td><code>WebFetch</code></td><td>Fetch & process web content</td></tr>
+    <tr><td><code>WebSearch</code></td><td>Search the web</td></tr>
+    <tr><td><code>NotebookEdit</code></td><td>Edit Jupyter cells</td></tr>
+    <tr><td><code>TodoWrite</code></td><td>Create/manage task lists</td></tr>
+    <tr><td><code>AskUserQuestion</code></td><td>Ask user for input</td></tr>
+    <tr><td><code>Skill</code></td><td>Invoke registered skills</td></tr>
+    <tr><td><code>mcp__*</code></td><td>MCP server tools</td></tr>
+  </table>
+</div>
+
+<!-- 14. Quick Reference -->
+<div class="card wide">
+  <div class="card-header">
+    <span class="card-num">14</span>
+    <span class="card-title">Quick Reference</span>
+  </div>
+  <div class="cols-2">
+    <div>
+      <div class="section-label">Essential Commands</div>
+      <table>
+        <tr><td><code>/init</code></td><td>Generate CLAUDE.md</td></tr>
+        <tr><td><code>/compact</code></td><td>Compress context</td></tr>
+        <tr><td><code>/memory</code></td><td>Edit memory files</td></tr>
+        <tr><td><code>/permissions</code></td><td>Manage allow/deny rules</td></tr>
+        <tr><td><code>/agents</code></td><td>Manage subagents</td></tr>
+        <tr><td><code>/skills</code></td><td>List available skills</td></tr>
+        <tr><td><code>/hooks</code></td><td>Manage hooks</td></tr>
+        <tr><td><code>/mcp</code></td><td>Manage MCP servers</td></tr>
+        <tr><td><code>/doctor</code></td><td>Environment diagnostics</td></tr>
+        <tr><td><code>/review</code></td><td>Code review a PR</td></tr>
+        <tr><td><code>/diff</code></td><td>Interactive diff viewer</td></tr>
+        <tr><td><code>/context</code></td><td>Visualize context usage</td></tr>
+        <tr><td><code>/model</code></td><td>Change AI model</td></tr>
+        <tr><td><code>/config</code></td><td>Open settings</td></tr>
+        <tr><td><code>/fast</code></td><td>Toggle fast mode</td></tr>
+        <tr><td><code>/plan</code></td><td>Enter plan mode</td></tr>
+        <tr><td><code>/clear</code></td><td>Clear conversation</td></tr>
+        <tr><td><code>/rewind</code></td><td>Restore previous point</td></tr>
+        <tr><td><code>/resume</code></td><td>Resume previous session</td></tr>
+        <tr><td><code>/export</code></td><td>Export conversation</td></tr>
+        <tr><td><code>/cost</code></td><td>Token usage stats</td></tr>
+        <tr><td><code>/theme</code></td><td>Change color theme</td></tr>
+        <tr><td><code>/vim</code></td><td>Toggle vim mode</td></tr>
+        <tr><td><code>/keybindings</code></td><td>Customize shortcuts</td></tr>
+        <tr><td><code>/feedback</code></td><td>Submit bug report</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="section-label">Keyboard Shortcuts</div>
+      <table>
+        <tr><td><code>Shift+Tab</code></td><td>Cycle permission modes</td></tr>
+        <tr><td><code>Esc Esc</code></td><td>Rewind menu</td></tr>
+        <tr><td><code>Alt+T</code></td><td>Toggle extended thinking</td></tr>
+        <tr><td><code>Alt+P</code></td><td>Switch model</td></tr>
+        <tr><td><code>Ctrl+C</code></td><td>Cancel operation</td></tr>
+        <tr><td><code>Ctrl+D</code></td><td>Exit Claude Code</td></tr>
+        <tr><td><code>Ctrl+L</code></td><td>Clear terminal</td></tr>
+        <tr><td><code>Ctrl+O</code></td><td>Toggle verbose output</td></tr>
+        <tr><td><code>Ctrl+R</code></td><td>Reverse search history</td></tr>
+        <tr><td><code>Ctrl+G</code></td><td>Open external editor</td></tr>
+        <tr><td><code>Ctrl+T</code></td><td>Toggle task list</td></tr>
+        <tr><td><code>Ctrl+B</code></td><td>Background tasks</td></tr>
+        <tr><td><code>Ctrl+F</code></td><td>Kill background agents</td></tr>
+        <tr><td><code>\ + Enter</code></td><td>Multiline input</td></tr>
+      </table>
+      <div class="section-label" style="margin-top:8px;">Special Prefixes</div>
+      <table>
+        <tr><td><code>@</code></td><td>File/folder autocomplete</td></tr>
+        <tr><td><code>!</code></td><td>Direct bash (no tokens)</td></tr>
+        <tr><td><code>#</code></td><td>Quick memory note</td></tr>
+        <tr><td><code>/</code></td><td>Slash command or skill</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- 15. Multi-File & Testing -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num">15</span>
+    <span class="card-title">Multi-File Editing & Testing</span>
+  </div>
+  <div class="section-label">Multi-File Workflow</div>
+  <ul>
+    <li><strong>Plan first</strong> — <code>Shift+Tab</code> into Plan Mode</li>
+    <li><strong>Read before edit</strong> — always read a file first</li>
+    <li><strong>Subagents for parallel edits</strong> — <code>isolation: worktree</code></li>
+    <li><strong>Prefer Edit over Write</strong> — Edit sends diffs only</li>
+    <li><strong>Use @filename</strong> — attach files for context</li>
+    <li><strong>/diff to review</strong> — check all changes</li>
+    <li><strong>Commit atomically</strong> — one logical change per commit</li>
+  </ul>
+  <div class="section-label" style="margin-top:8px;">Testing Strategies</div>
+  <ul>
+    <li>Create <code>.claude/skills/testing/SKILL.md</code></li>
+    <li>AAA pattern — Arrange, Act, Assert</li>
+    <li>Use PreToolUse hooks for CI validation</li>
+    <li>Factory mocks over inline mocks</li>
+    <li>Always test error paths, not just happy paths</li>
+    <li>Pre-approve: <code>"allow": ["Bash(npm run test*)"]</code></li>
+  </ul>
+</div>
+
+</div><!-- end grid -->
+
+<div class="footer">
+  Verified against official Anthropic documentation at <strong>code.claude.com</strong> — March 2026<br>
+  Source: <a href="https://code.claude.com" style="color:#4a6cf7;">code.claude.com</a> &middot;
+  <a href="https://docs.anthropic.com" style="color:#4a6cf7;">docs.anthropic.com</a> &middot;
+  <a href="https://modelcontextprotocol.io" style="color:#4a6cf7;">modelcontextprotocol.io</a>
+</div>
+
+</body>
+</html>
