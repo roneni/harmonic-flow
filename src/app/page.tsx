@@ -5,6 +5,7 @@ import { UploadPanel } from "@/components/landing/upload-panel";
 import { TracklistComparison } from "@/components/landing/tracklist-comparison";
 import FeatureCards from "@/components/landing/feature-cards";
 import FounderStory from "@/components/landing/founder-story";
+import { ShareButtons } from "@/components/landing/share-buttons";
 
 export default function HomePage() {
   return (
@@ -22,6 +23,7 @@ export default function HomePage() {
       </section>
       <UniversalIntegration />
       <FounderStory />
+      <ShareButtons />
     </>
   );
 }
