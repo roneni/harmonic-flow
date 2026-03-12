@@ -32,7 +32,7 @@ export function StructuredData() {
     name: "HarmonySet",
     url: "https://www.harmonyset.com",
     description:
-      "DJ tools built by the team behind Psychedelic Universe",
+      "DJ tools built by the creator of Psychedelic Universe",
   };
   return (
     <>

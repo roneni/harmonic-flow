@@ -17,8 +17,8 @@ export function SocialProof() {
           Built by DJs, for DJs
         </p>
         <p className="mx-auto mt-4 max-w-xl text-lg text-text-secondary leading-relaxed">
-          Created by the team behind one of the largest Psytrance channels on
-          YouTube. We built the tool we wished existed when planning our own
+          Created by the founder of one of the largest Psytrance channels on
+          YouTube. I built the tool I wished existed when planning my own
           sets.
         </p>
 

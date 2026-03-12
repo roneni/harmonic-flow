@@ -13,7 +13,8 @@ export function Footer() {
               Harmony<span className="text-primary">Set</span>
             </span>
             <p className="mt-2 text-sm text-text-secondary leading-relaxed">
-              Mathematically perfect DJ sets. Built by the team behind Psychedelic Universe.
+              Mathematically perfect DJ sets. Built by the creator of{' '}
+              <a href="https://psychedelic-universe.com" target="_blank" rel="noopener noreferrer" className="text-text-secondary transition-colors hover:text-primary underline">Psychedelic Universe</a>.
             </p>
           </div>
           {/* Tool */}
