@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { SavedPlaylist } from "@/lib/supabase/types";
 import type { Track, QualityScore } from "@/lib/types";
 import { exportRekordboxXml } from "@/lib/export/export-rekordbox-xml";
+import { RekordboxImportHelp } from "@/components/ui/rekordbox-import-help";
 
 interface PlaylistCardProps {
   playlist: SavedPlaylist;
@@ -103,6 +104,7 @@ export function PlaylistCard({
         >
           Rekordbox XML
         </button>
+        <RekordboxImportHelp />
 
         {confirmDelete ? (
           <div className="ml-auto flex items-center gap-2">

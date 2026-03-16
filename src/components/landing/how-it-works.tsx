@@ -19,7 +19,7 @@ const STEPS = [
     number: "03",
     title: "Download",
     description:
-      "Get the mathematically optimal order in seconds. See the before/after comparison, quality score, and circle-of-fifths visualization. Export as CSV.",
+      "Get the mathematically optimal order in seconds. See the before/after comparison, quality score, and circle-of-fifths visualization. Export as CSV or Rekordbox XML.",
   },
 ];
 

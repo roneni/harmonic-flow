@@ -2,6 +2,7 @@
 
 import type { Track } from "@/lib/types";
 import { exportRekordboxXml } from "@/lib/export/export-rekordbox-xml";
+import { RekordboxImportHelp } from "@/components/ui/rekordbox-import-help";
 
 interface DownloadButtonProps {
   tracks: Track[];
@@ -53,6 +54,7 @@ export function DownloadButton({
         <DownloadIcon />
         Rekordbox XML
       </button>
+      <RekordboxImportHelp />
     </div>
   );
 }
